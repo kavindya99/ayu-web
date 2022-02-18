@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+
+$primary-color:#5F8D88;
+$secondary-color-one:#BAC6B8;
+$secondary-color-two:#AEB68E;
+$secondary-color-three:#D7DAB4;
+$error-color:#D04848;
+$white-color:white;
+$shadow-color:rgba(0, 0, 0, 0.20);
+$shadow-text: 1px 2px 4px $shadow-color;
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+td{
+    font-size: 15px;
+}
+.bg-color{
+    background-color: $primary-color;
+}
+
+.text-color{
+    color: $primary-color;
+    text-shadow: $shadow-text;
+}
+
+.text-color-light{
+    color: $secondary-color-two;
+    text-shadow: $shadow-text;
+}
+
+.shadow-elements{
+    box-shadow: $shadow-text;
+}
+
+.btn-dark-green{
+    border-radius: 5px;
+    font-size: 20px;
+    color: $white-color;
+    background-color: $secondary-color-two;
+    text-transform: capitalize;
+    padding: 10px 20px;
+    border: none;
+}
+
+.btn-light-green{
+    border-radius: 10px;
+    font-size: 24px;
+    color: $white-color;
+    background-color: $secondary-color-one;
+    text-transform: capitalize;
+    padding: 10px 20px;
+    border: none;
+}
+
+.btn-table{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.page-item.active .page-link {
+    background-color: $secondary-color-two;
+    border-color: $secondary-color-two;
+}
+.inputs{
+    border: none;
+    box-shadow: inset 1px 2px 4px $shadow-color;
+    color: $secondary-color-two;
+}
+
+.sidebar-item{
+    background-color: $primary-color;
+    color: $white-color;
+    padding: 10px 15px 5px 15px;
+    text-decoration: none;
+}
+.sidebar-item:hover{
+    color: $primary-color;
+    background-color: $white-color;
+}
+
+.sidebar-item {
+    background-color: $primary-color;
+    color: $white-color;
+    padding: 10px 15px 5px 15px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 150ms linear;
+  }
+  
+  .sidebar-item:hover {
+    color: $primary-color;
+    background-color: $white-color;
+
+    box-shadow: 1px 1px 2px rgba(#fff, .2);
+    text-decoration: none;
+    text-shadow: -1px -1px 0 darken($primary-color, 9.5%);
+    transition: all 250ms linear;
+  }
+
+.toggle-style{
+    border: none;
+    background-color: $primary-color;
+}
+
+.toggle-style1{
+    border: none;
+    background-color: $white-color;
+}
+
+.dashboard{
+    background-image: url('/assets/img/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 79vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub-pages{
+    background-image: url('/assets/img/background.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 86vh;
+}
+
+.search-input{
+    border: none;
+}
+
+.search-icon{
+    background-color: white;
+    border: none;
+    box-shadow: $shadow-text;
+}
+
+.form-check-input:checked {
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+
+@media screen and (max-width: 1061px){
+    .dashboard{
+        height: 100%;
+    }
+    .sub-pages{
+        height: 100%;
+    }
+}
