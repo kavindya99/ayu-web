@@ -7,6 +7,7 @@ import { DoctorRegistrationRequestsComponent } from '../doctor-registration-requ
 import { DoctorsComponent } from '../doctors/doctors.component';
 import { FoodRecipesComponent } from '../food-recipes/food-recipes.component';
 import { HomeComponent } from '../home/home.component';
+import { InquiriesComponent } from '../inquiries/inquiries.component';
 import { OnlineShopComponent } from '../online-shop/online-shop.component';
 import { PatientsComponent } from '../patients/patients.component';
 import { PaymentsComponent } from '../payments/payments.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
         { path: 'payments', component: PaymentsComponent },
         { path: 'yoga-class', component: YogaClassesComponent },
         { path: 'yoga-poses', component: YogaPosesComponent },
+        { path: 'inquiries', component: InquiriesComponent },
   ]},
 
 ];

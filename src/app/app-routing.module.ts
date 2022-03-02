@@ -11,12 +11,16 @@ import { PatientsComponent } from './pages/patients/patients.component';
 import { PaymentsComponent } from './pages/payments/payments.component';
 import { YogaClassesComponent } from './pages/yoga-classes/yoga-classes.component';
 import { YogaPosesComponent } from './pages/yoga-poses/yoga-poses.component';
+import { BooksComponent } from './books/books.component';
+import { AddbookComponent } from './addbook/addbook.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       { path: '', component: LoginComponent },
+      { path: 'books', component: BooksComponent ,canActivate:['AuthGuard']},
+      { path: 'addbook', component: AddbookComponent },
     ],
   },
 
@@ -24,8 +28,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./pages/dashboard/dashboard.module').then(
-        (m) => m.DashboardModule
-      ),
+        (m) => m.DashboardModule,
+      ),/*canActivate:['AuthGuard']*/
   },
 
   { path: '**', redirectTo: '', pathMatch:'full'}

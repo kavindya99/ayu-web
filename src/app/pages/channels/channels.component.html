@@ -1,8 +1,8 @@
 <div class="container">
     <div class="sub-pages">
       <div class="p-4">
-        <div class="pt-5 mt-4">
-          <form class="col-md-6 col-xl-4 px-0 mr-md-3 pb-5">
+        <div class="d-flex flex-row flex-wrap pt-md-5 mt-md-4">
+          <form class="col-12 col-md-6 col-xl-4 px-0 mr-md-3 pb-3">
             <div class="form-group mb-0">
               <div class="input-group input-group-alternative">
                 <input class="form-control w-50 shadow-elements search-input" placeholder="Search channels . . ."
@@ -13,8 +13,28 @@
               </div>
             </div>
           </form>
+          <form class="col-12 col-md-3 col-xl-3 px-md-3 mr-md-3 pb-3">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative">
+                <input class="form-control w-50 shadow-elements text-color search-input" placeholder="Date"
+                  type="date">
+              </div>
+            </div>
+          </form>
+          <form class="col-12 col-md-3 col-xl-3 mr-md-3 pb-3">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative">
+                <select class="text-color form-select shadow-elements search-input" aria-label="Default select example">
+                  <option selected disabled>Method</option>
+                  <option value="1">Doctor one</option>
+                  <option value="2">Doctor two</option>
+                  <option value="3">Doctor Three</option>
+                </select>                  
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive pt-md-4">
           <table class="table table-bordered bg-light rounded shadow-elements">
             <tbody>
               <tr class="bg-color text-white text-center rounded">
@@ -31,89 +51,9 @@
                 <td>4 pm</td>
                 <td>Video</td>
                 <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
+                <td class="text-center"><button class="btn-table btn-default" (click)="editInfo(content1)"><i
                       class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
-                <td>Video</td>
-                <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
-                <td>Video</td>
-                <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
-                <td>Video</td>
-                <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
-                <td>Video</td>
-                <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
-                <td>Video</td>
-                <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
-                <td>Video</td>
-                <td>500</td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#editInfo"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" data-bs-toggle="modal"
-                    data-bs-target="#delete"><i
+                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
                       class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
               </tr>
             </tbody>
@@ -141,100 +81,42 @@
   </div>
 
   <!--edit modal starts here-->
-  <div class="modal fade rounded" id="editInfo" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered rounded modal-lg">
-      <div class="modal-content">
-        <div class="modal-header bg-color text-white">
-          <h5 class="modal-title" id="personalInfo">Edit Doctor Details</h5>
-        </div>
-        <div class="modal-body text-color">
-          <form action="" class="p-5">
-            <div class="row mb-4 w-100">
-              <div class="col-md-6">
-                <input type="text" class="inputs text-color-light form-control" placeholder="Doctor ID"
-                  aria-label="DoctorId">
-              </div>
-              <div class="col-md-6">
-                <input type="text" class="inputs text-color-light form-control" id="Position" placeholder="Position">
-              </div>
-            </div>
-            <div class="row mb-4 w-100">
-              <div class="col-md-6">
-                <input type="text" class="inputs text-color-light form-control w-100" id="Hospital"
-                  placeholder="Hospital">
-              </div>
-              <!-- <div class="col-md-6">
-                                      <input type="text" class="inputs text-color-light form-control w-100" id="conatctno" placeholder="Contact No">
-                                    </div> -->
-            </div>
-            <div class="row mb-4 w-100">
-              <div class="col-md-6">
-                <label for="time" class="col-12 pb-3">Available Time</label>
-                <div class="row">
-                  <div class="col-md-6">
-                    <select class="inputs text-color-light form-select" aria-label="Default select example">
-                      <option selected disabled>From</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <select class="inputs text-color-light form-select" aria-label="Default select example">
-                      <option selected disabled>To</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="services" class="col-12 pb-3">Services</label>
-                <div class="form-check">
-                  <input class="inputs text-color-light form-check-input" type="checkbox" value="" id="channel">
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Channel
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="inputs text-color-light form-check-input" type="checkbox" value="" id="onlineConsulting">
-                  <label class="form-check-label" for="flexCheckChecked">
-                    Online Consulting
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="inputs text-color-light form-check-input" type="checkbox" value="" id="onlineYogaClass">
-                  <label class="form-check-label" for="flexCheckChecked">
-                    Online Yoga Class
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end pt-5">
-              <button class="btn-dark-green px-5">Edit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+<ng-template #content1 let-modal>
+  <div class="modal-header bg-color text-white">
+    <h5 class="modal-title" id="personalInfo">Edit Channel Details</h5>
   </div>
-  
-  <!--delete modal starts here-->
-  <div class="modal fade rounded" id="delete" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered rounded modal-sm">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="personalInfo">Delete</h5>
-        </div>
-        <div class="modal-body text-color">
-          <div class="text-center text-dark">Do you want to remove this doctor from the system?</div>
-          <div class="text-center"><img src="../../../assets/img/decision.gif" class="w-50" alt=""></div>
-          <div class="d-flex flex-row justify-content-around">
-            <div><button class="btn btn-danger px-5">Yes</button></div>
-            <div><button class="btn btn-secondary px-5">No</button></div>
-          </div>
-        </div>
+  <div class="modal-body text-color">
+    <form action="" class="p-2">
+      <div class="pb-4">
+        <select class="inputs text-color form-select" aria-label="Default select example">
+          <option selected disabled>Doctor Name</option>
+          <option value="1">Doctor one</option>
+          <option value="2">Doctor two</option>
+          <option value="3">Doctor Three</option>
+        </select>
       </div>
-    </div>
+      <div class="pb-4">
+        <input type="date" class="inputs text-color form-control" id="Position" placeholder="Date">
+      </div>
+      <div class="pb-4">
+        <select class="inputs text-color form-select" aria-label="Default select example">
+          <option selected disabled>Time</option>
+          <option value="1">1 pm</option>
+          <option value="2">2 pm</option>
+          <option value="3">3 pm</option>
+        </select>
+      </div>
+      <div class="pb-4">
+        <select class="inputs text-color form-select" aria-label="Default select example">
+          <option selected disabled>Method</option>
+          <option value="1">Audio</option>
+          <option value="2">Video</option>
+        </select>                                      
+      </div>
+      <div class="d-flex justify-content-end pt-3">
+        <button class="btn-dark-green px-5" (click)="SuccessEdit ()">Edit</button>
+      </div>
+    </form>
   </div>
+</ng-template>
+

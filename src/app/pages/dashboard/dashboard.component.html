@@ -2,20 +2,21 @@
     <!-- Sidebar -->
     <div class="bg-color border-right" id="sidebar-wrapper">
         <div class="d-flex flex-row justify-content-between">
-            <div class="sidebar-heading"><a [routerLink]="['../dashboard']"><img src="../../../assets/brand/dashboard-logo.png" style="width: 80px;" alt=""></a></div>
+            <div class="sidebar-heading"><a [routerLink]="['../dashboard']"><img src="../../../assets/brand/dashboard-logo.png" style="width: 80px; padding-left: 6px;" alt=""></a></div>
             <!-- <div><button class="fs-2 text-white toggle-style" style="outline: none;" id="menu-toggle"><i class="{{ iconChange }}"></i></button></div> -->
         </div>
         <div class="list-group list-group-flush">
-          <a [routerLink]="['doctors']" class="sidebar-item"><i class="fas fa-user-md p-3"></i>Doctors</a>
-          <a [routerLink]="['patients']" class="sidebar-item"><i class="fas fa-user-injured p-3"></i>Patients</a>
-          <a [routerLink]="['channels']" class="sidebar-item"><i class="far fa-calendar-check p-3"></i>Channels</a>
-          <a [routerLink]="['appointments']" class="sidebar-item"><i class="fas fa-calendar-check p-3"></i>Appointments</a>
-          <a [routerLink]="['yoga-poses']" class="sidebar-item"><i class="fas fa-skating p-3"></i>Yoga</a>
-          <a [routerLink]="['yoga-class']" class="sidebar-item"><i class="fas fa-chalkboard-teacher p-3"></i>Yoga Classes</a>
-          <a [routerLink]="['food-recipes']" class="sidebar-item"><i class="fas fa-utensils p-3"></i>Food Recipes</a>
-          <a [routerLink]="['doctor-registration']" class="sidebar-item"><i class="far fa-registered p-3"></i>Doctor Registrations</a>
-          <a [routerLink]="['payments']" class="sidebar-item"><i class="fas fa-cash-register p-3"></i>Payments</a>
-          <a [routerLink]="['online-shop']" class="sidebar-item"><i class="fas fa-store p-3"></i>Online shop</a>
+          <a [routerLink]="['doctors']" class="sidebar-item"><i class="fas fa-user-md p-3 pb-2"></i>Doctors</a>
+          <a [routerLink]="['patients']" class="sidebar-item"><i class="fas fa-user-injured p-3 pb-2"></i>Patients</a>
+          <a [routerLink]="['channels']" class="sidebar-item"><i class="far fa-calendar-check p-3 pb-2"></i>Channels</a>
+          <a [routerLink]="['appointments']" class="sidebar-item"><i class="fas fa-calendar-check p-3 pb-2"></i>Appointments</a>
+          <a [routerLink]="['yoga-poses']" class="sidebar-item"><i class="fas fa-running p-3 pb-2"></i>Yoga</a>
+          <a [routerLink]="['yoga-class']" class="sidebar-item"><i class="fas fa-chalkboard-teacher p-3 pb-2"></i>Yoga Classes</a>
+          <a [routerLink]="['food-recipes']" class="sidebar-item"><i class="fas fa-utensils p-3 pb-2"></i>Food Recipes</a>
+          <a [routerLink]="['doctor-registration']" class="sidebar-item"><i class="far fa-registered p-3 pb-2"></i>Doctor Registrations</a>
+          <a [routerLink]="['payments']" class="sidebar-item"><i class="fas fa-cash-register p-3 pb-2"></i>Payments</a>
+          <a [routerLink]="['online-shop']" class="sidebar-item"><i class="fas fa-store p-3 pb-2"></i>Online shop</a>
+          <a [routerLink]="['inquiries']" class="sidebar-item"><i class="fas fa-store p-3 pb-2"></i>Inquiries</a>
         </div>
       </div>
     <!-- /#sidebar-wrapper -->
@@ -33,9 +34,9 @@
                   <button type="button" class="bg-white" style="border: none;" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="../../../assets/img/prof.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50px;" alt="">
                   </button>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Log out</a></li>
+                  <ul class="dropdown-menu dropdown-menu-end bg-color">
+                    <li><a class="dropdown-item text-white" href="#">Profile</a></li>
+                    <li><a class="dropdown-item text-white" (click)="onLogout()">Log out</a></li>
                   </ul>
                 </div>
               </li>

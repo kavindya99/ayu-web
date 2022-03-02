@@ -1,1 +1,126 @@
-<p>doctor-registration-requests works!</p>
+<div class="container">
+    <div class="sub-pages">
+      <div class="p-4">
+        <div class="d-flex flex-row flex-wrap pt-md-5 mt-md-4">
+          <form class="col-12 col-md-6 col-xl-4 px-0 mr-md-3 pb-3">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative">
+                <input class="form-control w-50 shadow-elements search-input" placeholder="Search doctor registrations . . ."
+                  type="text">
+                  <div class="">
+                    <span class="input-group-text search-icon"><i class="fas fa-search p-1 text-color"></i></span>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="table-responsive pt-md-4">
+          <table class="table table-bordered bg-light rounded shadow-elements">
+            <tbody>
+              <tr class="bg-color text-white text-center rounded">
+                <th scope="col" class="rounded-start">Doctor Name</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col" class="rounded-end"></th>
+              <tr>
+                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
+                <td>1st April</td>
+                <td class="text-center"><button class="btn-table btn-default" (click)="viewInfo(content)" placement="top" ngbTooltip="View Doctor Info" type="button"
+                    ><i
+                      class="fab fa-wpforms text-color shadow-elements py-2 px-3 rounded"></i></button></td>
+                <td class="text-center"><button class="btn-table btn-default" (click)="approveMessage()"><i
+                      class="fas fa-thumbs-up text-primary shadow-elements py-2 px-3 rounded"></i></button></td>
+                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
+                      class="fas fa-thumbs-down text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+        <nav aria-label="...">
+          <ul class="pagination justify-content-center">
+            <a class="page-link text-color-light" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+            <li class="page-item"><a class="page-link text-color-light" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link text-color-light" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link text-color-light" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link text-color-light" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+
+  <!--view details modal starts here-->
+  <ng-template #content let-modal>
+    <div class="modal-header bg-color text-white">
+        <h5 class="modal-title" id="personalInfo">Doctor Registration Form Details</h5>
+      </div>
+      <div class="modal-body text-color">
+          <div class="text-color-light pb-2">Personal Info</div>
+          <div class="row">
+              <div class="col-4">Name</div>
+              <div class="col-1">:</div>
+              <div class="col-7">Jeewandara Banadara Wijewardhana</div>
+          </div>
+          <div class="row pb-1">
+              <div class="col-4">Gender</div>
+              <div class="col-1">:</div>
+              <div class="col-7">Female</div>
+          </div>
+          <div class="row pb-1">
+              <div class="col-4">Email</div>
+              <div class="col-1">:</div>
+              <div class="col-7">jeewandara@gmail.com</div>
+          </div>
+          <div class="row pb-1">
+              <div class="col-4">Contact No.</div>
+              <div class="col-1">:</div>
+              <div class="col-7">070 4420987</div>
+          </div>
+          <div class="row pb-1">
+              <div class="col-4">Address</div>
+              <div class="col-1">:</div>
+              <div class="col-7">1st Lane, avenra road, Ratnapura</div>
+          </div>
+          <div class="row pb-1">
+              <div class="col-4">Available Time</div>
+              <div class="col-1">:</div>
+              <div class="col-7">From : 5.00pm <br> To : 7.00pm</div>
+          </div>
+          <div class="row pb-3">
+              <div class="col-4">Service</div>
+              <div class="col-1">:</div>
+              <div class="col-7">Channel <br>Online Consulting <br>Online Yoga Class</div>
+          </div>
+          <div class="text-color-light pb-2">Proffesional Info</div>
+          <div class="row pb-1">
+              <div class="col-4">Doctor ID</div>
+              <div class="col-1">:</div>
+              <div class="col-7">10707360</div>
+          </div>
+          <div class="row pb-1">
+              <div class="col-4">Hospital</div>
+              <div class="col-1">:</div>
+              <div class="col-7">Ratnapura</div>
+          </div>
+          <div class="row">
+              <div class="col-4">Specialization</div>
+              <div class="col-1">:</div>
+              <div class="col-7">Eye Specialist</div>
+          </div>
+      </div>
+</ng-template>
+
+
+
+

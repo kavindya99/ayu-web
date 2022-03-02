@@ -1,4 +1,4 @@
-<div class="container-fluid bg-color vh-100">
+<div class="container-fluid bg-color" style="height: 97vh;">
     <div class="container pt-5">
         <img src="./assets/brand/logo.png" style="width: 70px; height: auto; object-fit: contain;" alt="">
         <div class="row d-flex flex-row align-items-center justify-content-center">
@@ -12,18 +12,19 @@
             <div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
                 <div class="col-md-12 col-lg-8 bg-white p-5 rounded ">
                     <h2 class="text-color fw-bold py-5">SIGN IN</h2>
-                    <form action="">
+                    <form [formGroup]="loginForm" (ngSubmit)="loginFunction()">
+                    <!-- <form> -->
                         <div class="mb-5 w-100">
-                            <input type="email" class="inputs text-color-light form-control" id="email" placeholder="Email">
+                            <input type="email" class="inputs text-color-light form-control" id="email" name="email" formControlName="email" placeholder="Email">
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="inputs text-color-light form-control w-100" id="password" placeholder="Password">
+                            <input type="password" class="inputs text-color-light form-control w-100" id="password" name="password" formControlName="password" placeholder="Password">
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             <a href="" class="text-color-light float-right" style="text-decoration: none;"><h6>Fogot Password?</h6></a>
                         </div>
                         <div class=" d-flex justify-content-center py-5">
-                            <button class="btn-dark-green w-100" [routerLink]="['/dashboard']">Sign In</button>
+                            <button class="btn-dark-green w-100">Sign In</button><!--[routerLink]="['dashboard']"-->
                         </div>                        
                     </form>
                 </div>

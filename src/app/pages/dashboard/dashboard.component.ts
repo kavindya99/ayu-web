@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
       this.router = router;
       if ( event instanceof NavigationEnd ) {
         if (this.router.isActive("dashboard", true )) {
-          this.title = ""
+          this.title = "admin dashboard"
         }
         if (this.router.isActive("dashboard/doctors", true )) {
           this.title = "doctors"
@@ -41,16 +41,19 @@ export class DashboardComponent implements OnInit {
           this.title = "yoga classes"
         }
         if (this.router.isActive("dashboard/food-recipes", true )) {
-          this.title = "food-recipes"
+          this.title = "food recipes"
         }
         if (this.router.isActive("dashboard/doctor-registration", true )) {
-          this.title = "doctor registration"
+          this.title = "doctor registrations"
         }
         if (this.router.isActive("dashboard/payments", true )) {
           this.title = "Payments"
         }
         if (this.router.isActive("dashboard/online-shop", true )) {
           this.title = "online shop"
+        }
+        if (this.router.isActive("dashboard/inquiries", true )) {
+          this.title = "inquiries"
         }
       }
     });
@@ -70,6 +73,11 @@ export class DashboardComponent implements OnInit {
       e.preventDefault();
       $('#wrapper').toggleClass('toggled');
     });
+  }
+
+  onLogout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
   }
 
 }
