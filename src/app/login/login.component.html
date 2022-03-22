@@ -1,19 +1,19 @@
-<div class="container-fluid bg-color" style="height: 97vh;">
-    <div class="container pt-5">
-        <img src="./assets/brand/logo.png" style="width: 70px; height: auto; object-fit: contain;" alt="">
+<div class="container-fluid bg-color login-body d-flex flex-row align-items-center justify-content-center">
+    <div class="container py-5">
+        <img src="./assets/brand/logo.png" style="width: 70px; height: auto; object-fit: contain; position: absolute; top: 0; margin-top: 30px;" alt="">
         <div class="row d-flex flex-row align-items-center justify-content-center">
-            <div class="col-md-5 d-flex flex-column align-items-right justify-content-center">
+            <div class="col-md-6 d-flex flex-column align-items-md-start align-items-center justify-content-center img-welcome">
                 <img src="./assets/img/main.png" class="w-50" alt="">
-                <div class="text-white h2 pt-5">
+                <div class="text-white h2 pt-5 welcome-text">
                     <h1>Welcome!!</h1>
                     to the admin dashboard of Triveda mobile application
                 </div>
             </div>
             <div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
-                <div class="col-md-12 col-lg-8 bg-white p-5 rounded ">
-                    <h2 class="text-color fw-bold py-5">SIGN IN</h2>
-                    <form [formGroup]="loginForm" (ngSubmit)="loginFunction()">
-                    <!-- <form> -->
+                <div class="col-md-12 col-lg-8 bg-white p-5 rounded login-form">
+                    <h2 class="text-color fw-bold pb-5">SIGN IN</h2>
+                    <!-- <form [formGroup]="loginForm" (ngSubmit)="loginFunction()"> -->
+                    <form>
                         <div class="mb-5 w-100">
                             <input type="email" class="inputs text-color-light form-control" id="email" name="email" formControlName="email" placeholder="Email">
                         </div>
@@ -21,23 +21,41 @@
                             <input type="password" class="inputs text-color-light form-control w-100" id="password" name="password" formControlName="password" placeholder="Password">
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <a href="" class="text-color-light float-right" style="text-decoration: none;"><h6>Fogot Password?</h6></a>
+                            <a href="" class="text-color-light float-right" style="text-decoration: none;" (click)="forgotPassword(content1)"><h6>Fogot Password?</h6></a>
                         </div>
-                        <div class=" d-flex justify-content-center py-5">
-                            <button class="btn-dark-green w-100">Sign In</button><!--[routerLink]="['dashboard']"-->
+                        <div class=" d-flex justify-content-center pt-5">
+                            <button class="btn-dark-green w-100" [routerLink]="['dashboard']">Sign In</button><!--[routerLink]="['dashboard']"-->
                         </div>                        
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="leaves w-100 d-flex align-items-center justify-content-around">
+    <div class="leaves d-flex align-items-center justify-content-around" style="width: 98%;">
         <img src="./assets/brand/leaf-one.png" alt="">
         <img src="./assets/brand/leaf-two.png" alt="">
-        <img src="./assets/brand/leaf-three.png" alt="">
-        <img src="./assets/brand/leaf-four.png" alt="">
-        <img src="./assets/brand/leaf-five.png" alt="">
-        <img src="./assets/brand/leaf-six.png" alt="">
-        <img src="./assets/brand/leaf-seven.png" alt="">
+        <img src="./assets/brand/leaf-three.png" class="d-none d-md-block" alt="">
+        <img src="./assets/brand/leaf-four.png" class="d-none d-md-block" alt="">
+        <img src="./assets/brand/leaf-five.png" class="d-none d-lg-block d-xl-none" alt="">
+        <img src="./assets/brand/leaf-six.png" class="d-none d-lg-block d-xl-none" alt="">
+        <img src="./assets/brand/leaf-seven.png" class="d-none d-lg-block d-xl-none" alt="">
     </div>
 </div>
+
+  <!--forgot password modal starts here-->
+  <ng-template #content1 let-modal>
+    <div class="modal-body text-color">
+        <div class="col-md-12 col-lg-8 bg-white p-5 rounded login-form">
+            <h2 class="text-color fw-bold pb-5">Forget Password</h2>
+            <form>
+            <!-- <form> -->
+                <div class="mb-5 w-100">
+                    <input type="email" class="inputs text-color-light form-control" id="email" name="email" formControlName="email" placeholder="Email">
+                </div>
+                <div class=" d-flex justify-content-center pt-5">
+                    <button class="btn-dark-green w-100">Send</button><!--[routerLink]="['dashboard']"-->
+                </div>                        
+            </form>
+        </div>
+    </div>
+  </ng-template>

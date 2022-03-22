@@ -39,18 +39,29 @@
             <tbody>
               <tr class="bg-color text-white text-center rounded">
                 <th scope="col" class="rounded-start">Doctor Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
+                <th scope="col">Date & Time</th>
+                <!-- <th scope="col">Time</th> -->
                 <th scope="col">Method</th>
                 <th scope="col">Fee</th>
                 <th scope="col"></th>
                 <th scope="col" class="rounded-end"></th>
+              <tr *ngFor="let item of items$|async">
+                <th scope="row" class="text-color">{{item.doctorName}}</th>
+                <td>{{item.date}}</td>
+                <!-- <td>{{item.date}}</td> -->
+                <td>{{item.method}}</td>
+                <td>{{item.fee}}</td>
+                <td class="text-center"><button class="btn-table btn-default" (click)="editInfo(content1)"><i
+                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
+                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
+                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
+              </tr>
               <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
-                <td>4 pm</td>
+                <th scope="row" class="text-color">Item one</th>
+                <td>2022.03.20.</td>
+                <!-- <td>{{item.date}}</td> -->
                 <td>Video</td>
-                <td>500</td>
+                <td>1500</td>
                 <td class="text-center"><button class="btn-table btn-default" (click)="editInfo(content1)"><i
                       class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
                 <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i

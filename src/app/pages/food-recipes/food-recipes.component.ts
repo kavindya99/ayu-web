@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { AyuService } from 'src/app/ayu.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,9 +12,32 @@ import Swal from 'sweetalert2';
 })
 export class FoodRecipesComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  recipe$!:Observable<any[]>;
+  public recipeForm!:FormGroup;
+  constructor(private formBuilder:FormBuilder,private modalService: NgbModal,private service: AyuService) { }
 
   ngOnInit(): void {
+    // this.getAllBooks();
+    // this.init();
+    this.recipe$=this.service.getRecipes();
+    console.log(this.recipe$);
+    this.init();
+  }
+
+  public saveRecipe():void{
+    this.service.addRecipe(this.recipeForm.value).subscribe(result=>{
+      alert("new recipe added");
+    })
+  }
+  
+  private init(): void{
+    this.recipeForm=this.formBuilder.group({
+      name:[],
+      type:[],
+      ingredients:[],
+      steps:[],
+      image:[],
+    });
   }
 
   editInfo(content1: any) {
@@ -109,7 +135,7 @@ export class FoodRecipesComponent implements OnInit {
 
   
 
-  add(){
+  addSteps(){
     let row = document.createElement('div');  
       row.className = 'row';
       row.innerHTML = `
@@ -118,6 +144,17 @@ export class FoodRecipesComponent implements OnInit {
       <input type="text" class="inputs text-color form-control" id="steps" placeholder="Steps">
       </div>`;
       document.querySelector('#AddField')?.appendChild(row);
+  }
+
+  addIngredients(){
+    let row = document.createElement('div');  
+      row.className = 'row';
+      row.innerHTML = `
+      <br>
+      <div class="pb-4">
+      <input type="text" class="inputs text-color form-control" id="ingredients" placeholder="Ingredients">
+      </div>`;
+      document.querySelector('#AddNewField')?.appendChild(row);
   }
 
 }

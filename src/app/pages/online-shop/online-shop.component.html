@@ -23,6 +23,7 @@
             <tbody>
               <tr class="bg-color text-white text-center rounded">
                 <th scope="col" class="rounded-start">Medicine</th>
+                <th scope="col">Category</th>
                 <th scope="col">Unit</th>
                 <th scope="col">Price(Unit)</th>
                 <th scope="col">Quantity</th>
@@ -33,58 +34,7 @@
                 <th scope="col" class="rounded-end"></th>
               <tr>
                 <th scope="row" style="max-width: 200px;" class="text-color">Meetama Kamburukola Meetama Kamburukola Meetama Kamburukola</th>
-                <td>Manchandi</td>
-                <td>50</td>
-                <td>300</td>
-                <td>50</td>
-                <td>500</td>
-                <!-- <td>100</td> -->
-                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" style="max-width: 200px;" class="text-color">Meetama Kamburukola Meetama Kamburukola Meetama Kamburukola</th>
-                <td>Manchandi</td>
-                <td>50</td>
-                <td>300</td>
-                <td>50</td>
-                <td>500</td>
-                <!-- <td>100</td> -->
-                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" style="max-width: 200px;" class="text-color">Meetama Kamburukola Meetama Kamburukola Meetama Kamburukola</th>
-                <td>Manchandi</td>
-                <td>50</td>
-                <td>300</td>
-                <td>50</td>
-                <td>500</td>
-                <!-- <td>100</td> -->
-                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" style="max-width: 200px;" class="text-color">Meetama Kamburukola Meetama Kamburukola Meetama Kamburukola</th>
-                <td>Manchandi</td>
-                <td>50</td>
-                <td>300</td>
-                <td>50</td>
-                <td>500</td>
-                <!-- <td>100</td> -->
-                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row" style="max-width: 200px;" class="text-color">Meetama Kamburukola Meetama Kamburukola Meetama Kamburukola</th>
+                <td>Kasaya</td>
                 <td>Manchandi</td>
                 <td>50</td>
                 <td>300</td>
@@ -131,6 +81,14 @@
               <input type="text" class="inputs text-color form-control" id="Medicine" placeholder="Medicine">
           </div>
           <div class="pb-4">
+            <select class="inputs text-color form-select" aria-label="Default select example">
+              <option selected disabled>Category</option>
+              <option value="1">Category one</option>
+              <option value="2">Category two</option>
+              <option value="3">Category Three</option>
+            </select>
+          </div>
+          <div class="pb-4">
             <input type="text" class="inputs text-color form-control" id="Unit" placeholder="Unit">
           </div>
           <div class="pb-4">
@@ -155,6 +113,14 @@
         <form action="" class="p-5">
           <div class="pb-4">
               <input type="text" class="inputs text-color form-control" id="Medicine" placeholder="Medicine">
+          </div>
+          <div class="pb-4">
+            <select class="inputs text-color form-select" aria-label="Default select example">
+              <option selected disabled>Category</option>
+              <option value="1">Category one</option>
+              <option value="2">Category two</option>
+              <option value="3">Category Three</option>
+            </select>
           </div>
           <div class="pb-4">
             <input type="text" class="inputs text-color form-control" id="Unit" placeholder="Unit">

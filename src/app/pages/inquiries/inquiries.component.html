@@ -22,29 +22,17 @@
                 <th scope="col">Email</th>
                 <th scope="col">Subject</th>
                 <th scope="col" class="rounded-end">Description</th>
-              <tr>
-                <th scope="row" class="text-color" style="max-width: 200px;">Jeewandara Banadara Wijewardhana</th>
-                <td>test@gmail.com</td>
-                <td style="max-width: 200px;">this is the subject of my inquiry</td>
-                <td style="max-width: 220px;">this is the description of my inquiry. this is somewhat long like bla bla bla cus this is the description</td>
+              <tr *ngFor="let item of items$|async">
+                <th scope="row" class="text-color" style="max-width: 200px;">{{item.name}}</th>
+                <td>{{item.email}}</td>
+                <td style="max-width: 200px; min-width: 100px;">{{item.subject}}</td>
+                <td style="max-width: 220px;min-width: 200px;">{{item.description}}</td>
               </tr>
               <tr>
-                <th scope="row" class="text-color" style="max-width: 200px;">Jeewandara Banadara Wijewardhana</th>
+                <th scope="row" class="text-color" style="max-width: 200px;">name of the sender</th>
                 <td>test@gmail.com</td>
-                <td style="max-width: 200px;">this is the subject of my inquiry</td>
-                <td style="max-width: 220px;">this is the description of my inquiry. this is somewhat long like bla bla bla cus this is the description</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color" style="max-width: 200px;">Jeewandara Banadara Wijewardhana</th>
-                <td>test@gmail.com</td>
-                <td style="max-width: 200px;">this is the subject of my inquiry</td>
-                <td style="max-width: 220px;">this is the description of my inquiry. this is somewhat long like bla bla bla cus this is the description</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-color" style="max-width: 200px;">Jeewandara Banadara Wijewardhana</th>
-                <td>test@gmail.com</td>
-                <td style="max-width: 200px;">this is the subject of my inquiry</td>
-                <td style="max-width: 220px;">this is the description of my inquiry. this is somewhat long like bla bla bla cus this is the description</td>
+                <td style="max-width: 200px; min-width: 100px;">about payments</td>
+                <td style="max-width: 220px;min-width: 200px;">this is the description of my inquiry</td>
               </tr>
             </tbody>
           </table>

@@ -30,15 +30,45 @@
                             <th scope="col"></th>
                             <th scope="col" class="rounded-end"></th>
                         <tr>
-                            <th scope="row" class="text-color">Food 1</th>
-                            <td>Food type 1</td>
+                            <th scope="row" class="text-color">recipe one</th>
+                            <td>Cooking item</td>
                             <!-- <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><i
                                         class="fas fa-image text-warning shadow-elements py-2 px-3 rounded"></i></button>
                             </td> -->
                             <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><div class="shadow-elements py-1 px-3 rounded"><img src="../../../assets/img/ingredients.png" alt="" style="width: 13.13px; height: 14.4px;"></div></button>
+                                <!--ingredients view modal starts here-->
+                                <ng-template #content3 let-modal>
+                                    <div class="modal-header bg-color text-white">
+                                        <h5 class="modal-title" id="personalInfo">Ingredients</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="modal-body text-color">
+                                            <!-- <div class="text-dark">{{recipe.ingredients}}</div> -->
+                                            <div class="text-dark">green jack cut into 1/2 cm peaces : <span>1/2 Kg</span></div>
+                                            <div class="text-dark">carrot (cut into small peaces) : <span>100g</span></div>
+                                            <div class="text-dark">eggs : <span>2</span></div>
+                                            <div class="text-dark">salt to taste : <span></span></div>
+                                            <div class="text-dark">turmeric powder : <span>1/2 tsp</span></div>
+                                        </div>
+                                    </div>
+                                </ng-template>
                             </td>
                             <td class="text-center"><button class="btn-table btn-default" (click)="viewSteps(content4)"><i
                                     class="fas fa-stream text-default shadow-elements py-2 px-3 rounded"></i></button>
+                                    <!--viewStep modal starts here-->
+                                    <ng-template #content4 let-modal>
+                                        <div class="modal-header bg-dark text-white">
+                                            <h5 class="modal-title" id="personalInfo">Steps</h5>
+                                        </div>
+                                        <div class="modal-body text-color">
+                                            <div class="text-dark">Step 1</div>
+                                            <!-- <div class="text-dark" style="padding-left: 20px;">{{recipe.steps}}</div> -->
+                                            <div class="text-dark">Step 2</div>
+                                            <div class="text-dark" style="padding-left: 20px;">Description is here</div>
+                                            <div class="text-dark">Step 3</div>
+                                            <div class="text-dark" style="padding-left: 20px;">Description is here</div>
+                                        </div>
+                                    </ng-template>
                             </td>
                             <td class="text-center"><button class="btn-table btn-default" (click)="editInfo(content1)"><i
                                         class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button>
@@ -119,36 +149,6 @@
   </ng-template>
 
 
-<!--image or video view modal starts here-->
-<ng-template #content3 let-modal>
-    <div class="modal-header bg-color text-white">
-        <h5 class="modal-title" id="personalInfo">Ingredients</h5>
-    </div>
-    <div class="modal-body">
-        <div class="modal-body text-color">
-            <div class="text-dark">green jack cut into 1/2 cm peaces : <span>1/2 Kg</span></div>
-            <div class="text-dark">carrot (cut into small peaces) : <span>100g</span></div>
-            <div class="text-dark">eggs : <span>2</span></div>
-            <div class="text-dark">salt to taste : <span></span></div>
-            <div class="text-dark">turmeric powder : <span>1/2 tsp</span></div>
-        </div>
-    </div>
-</ng-template>
-
-<!--viewStep modal starts here-->
-<ng-template #content4 let-modal>
-    <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="personalInfo">Steps</h5>
-    </div>
-    <div class="modal-body text-color">
-        <div class="text-dark">Step 1</div>
-        <div class="text-dark" style="padding-left: 20px;">Description is here</div>
-        <div class="text-dark">Step 2</div>
-        <div class="text-dark" style="padding-left: 20px;">Description is here</div>
-        <div class="text-dark">Step 3</div>
-        <div class="text-dark" style="padding-left: 20px;">Description is here</div>
-    </div>
-</ng-template>
     <!-- Main div and ADD button is created -->
     <div class="showInputField" id="hi"></div>
     
@@ -160,14 +160,12 @@
         <h5 class="modal-title" id="add">Add Recipe</h5>
     </div>
     <div class="modal-body text-color">
-        <form action="" class="p-5">
+        <form [formGroup]="recipeForm" (ngSubmit)="saveRecipe()" class="p-5">
             <div class="pb-4">
                 <input type="text" class="inputs text-color form-control" id="Name" placeholder="Name" required>
             </div>
-            <div class="" id="AddField"></div>
-            <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="add()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>                   
             <div class="pb-4">
-                <select class="inputs text-color form-select" aria-label="Default select example">
+                <select class="inputs text-color form-select" aria-label="Default select example" id="type" name="type" formControlName="type">
                     <option selected disabled>Type</option>
                     <option value="1">type 1</option>
                     <option value="2">type 1</option>
@@ -180,7 +178,7 @@
                       <div class="img-container">
                         <img class="card-image" src="../../../assets/img/add-image.png"  alt="..." style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"/>
                         <label for="file"><a class="btn btn-sm btn-default p-2 px-4"><i class="fas fa-pencil-alt"></i> Add</a></label>
-                        <input type="file" id="file" name="profile_picture" placeholder="profile" class="card-header__edit"  hidden>
+                        <input type="file" id="file" name="profile_picture" placeholder="profile" class="card-header__edit" id="image" name="image" formControlName="image"  hidden>
                       </div>
                       <!-- <span class="w-100 text-left">
                         <br>
@@ -190,13 +188,23 @@
                   </div>
             </div>
             <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="Ingredients" placeholder="Ingredients">
+                <!-- <input type="text" class="inputs text-color form-control" id="ingredients" name="ingredients" formControlName="ingredients" placeholder="Ingredients"> -->
+                <quill-editor [style]="{height : 'auto'}" formControlName="des" placeholder="Description"></quill-editor>
             </div>
+            
             <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="steps" placeholder="Steps">
+                <input type="text" class="inputs text-color form-control" id="steps" name="steps" formControlName="steps" placeholder="Steps">
             </div>
+            <div class="" id="AddField"></div>
+            <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="addSteps()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>
+            
+            <div class="pb-4">
+                <input type="text" class="inputs text-color form-control" id="steps" name="ingredients" formControlName="ingredients" placeholder="Ingredients">
+            </div>
+            <div class="" id="AddNewField"></div>
+            <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="addIngredients()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>
             <div class="d-flex justify-content-end pt-3">
-                <button class="btn-dark-green px-5" (click)="SuccessAdd ()">Add</button>
+                <button type="submit" value="save" class="btn-dark-green px-5">Add</button>
             </div>
         </form>
     </div>

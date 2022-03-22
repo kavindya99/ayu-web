@@ -17,20 +17,20 @@ import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch:'full'},
-  { path: 'dashboard', component: DashboardComponent,
+  { path: 'dashboard', component: DashboardComponent, /*canActivate:['AuthGuard'],*/
       children: [
         { path: '', component: HomeComponent },
-        { path: 'appointments', component: AppointmentsComponent },
-        { path: 'channels', component: ChannelsComponent },
-        { path: 'doctor-registration', component: DoctorRegistrationRequestsComponent},
-        { path: 'doctors', component: DoctorsComponent },
-        { path: 'food-recipes', component: FoodRecipesComponent },
-        { path: 'online-shop', component: OnlineShopComponent },
-        { path: 'patients', component: PatientsComponent },
-        { path: 'payments', component: PaymentsComponent },
-        { path: 'yoga-class', component: YogaClassesComponent },
-        { path: 'yoga-poses', component: YogaPosesComponent },
-        { path: 'inquiries', component: InquiriesComponent },
+        { path: 'channels', component: AppointmentsComponent,/*canActivate:['AuthGuard'],*/ },
+        { path: 'online-consultation', component: ChannelsComponent,/*canActivate:['AuthGuard'],*/ },
+        { path: 'doctor-registration', component: DoctorRegistrationRequestsComponent,/*canActivate:['AuthGuard'],*/},
+        { path: 'doctors', component: DoctorsComponent ,/*canActivate:['AuthGuard'],*/},
+        { path: 'food-recipes', component: FoodRecipesComponent, /*canActivate:['AuthGuard'],*/},
+        { path: 'online-shop', component: OnlineShopComponent , /*canActivate:['AuthGuard'],*/},
+        { path: 'patients', component: PatientsComponent , /*canActivate:['AuthGuard'],*/},
+        { path: 'payments', component: PaymentsComponent , /*canActivate:['AuthGuard'],*/},
+        { path: 'yoga-class', component: YogaClassesComponent ,/*canActivate:['AuthGuard'],*/},
+        { path: 'yoga-poses', component: YogaPosesComponent ,/*canActivate:['AuthGuard'],*/},
+        { path: 'inquiries', component: InquiriesComponent ,/*canActivate:['AuthGuard'],*/}, 
   ]},
 
 ];

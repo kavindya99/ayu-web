@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { AyuService } from 'src/app/ayu.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,9 +11,15 @@ import Swal from 'sweetalert2';
 })
 export class ChannelsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  items$!:Observable<any[]>;
+  date!:Observable<any>[];
+  constructor(private service: AyuService, private modalService: NgbModal /*private formBuilder: FormBuilder*/) { }
 
   ngOnInit(): void {
+    // this.getAllBooks();
+    // this.init();
+    this.items$=this.service.getOnlineConsultation();
+    console.log(this.items$);
   }
 
   editInfo(content1: any) {

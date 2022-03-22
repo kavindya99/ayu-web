@@ -27,12 +27,12 @@ export class DashboardComponent implements OnInit {
         if (this.router.isActive("dashboard/patients", true )) {
           this.title = "patients"
         }
-        if (this.router.isActive("dashboard/channels", true )) {
-          this.title = "channels"
+        if (this.router.isActive("dashboard/online-consultation", true )) {
+          this.title = "online consultation"
         }
 
-        if (this.router.isActive("dashboard/appointments", true )) {
-          this.title = "appointments"
+        if (this.router.isActive("dashboard/channels", true )) {
+          this.title = "channels"
         }
         if (this.router.isActive("dashboard/yoga-poses", true )) {
           this.title = "yoga poses"
