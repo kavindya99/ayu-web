@@ -29,9 +29,9 @@
                             <th scope="col">Steps</th>
                             <th scope="col"></th>
                             <th scope="col" class="rounded-end"></th>
-                        <tr>
-                            <th scope="row" class="text-color">recipe one</th>
-                            <td>Cooking item</td>
+                        <tr *ngFor="let recipe of recipe$|async">
+                            <th scope="row" class="text-color">{{recipe.name}}</th>
+                            <td>{{recipe.type}}</td>
                             <!-- <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><i
                                         class="fas fa-image text-warning shadow-elements py-2 px-3 rounded"></i></button>
                             </td> -->
@@ -43,12 +43,12 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="modal-body text-color">
-                                            <!-- <div class="text-dark">{{recipe.ingredients}}</div> -->
-                                            <div class="text-dark">green jack cut into 1/2 cm peaces : <span>1/2 Kg</span></div>
+                                            <div class="text-dark">{{recipe.ingredients}}</div>
+                                            <!-- <div class="text-dark">green jack cut into 1/2 cm peaces : <span>1/2 Kg</span></div>
                                             <div class="text-dark">carrot (cut into small peaces) : <span>100g</span></div>
                                             <div class="text-dark">eggs : <span>2</span></div>
                                             <div class="text-dark">salt to taste : <span></span></div>
-                                            <div class="text-dark">turmeric powder : <span>1/2 tsp</span></div>
+                                            <div class="text-dark">turmeric powder : <span>1/2 tsp</span></div> -->
                                         </div>
                                     </div>
                                 </ng-template>
@@ -62,11 +62,11 @@
                                         </div>
                                         <div class="modal-body text-color">
                                             <div class="text-dark">Step 1</div>
-                                            <!-- <div class="text-dark" style="padding-left: 20px;">{{recipe.steps}}</div> -->
-                                            <div class="text-dark">Step 2</div>
+                                            <div class="text-dark" style="padding-left: 20px;">{{recipe.steps}}</div>
+                                            <!-- <div class="text-dark">Step 2</div>
                                             <div class="text-dark" style="padding-left: 20px;">Description is here</div>
                                             <div class="text-dark">Step 3</div>
-                                            <div class="text-dark" style="padding-left: 20px;">Description is here</div>
+                                            <div class="text-dark" style="padding-left: 20px;">Description is here</div> -->
                                         </div>
                                     </ng-template>
                             </td>

@@ -15,10 +15,6 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  accountInfo(content: any) {
-    this.modalService.open(content, { centered: true });
-  }
-
   editItem1(content1: any) {
      this.modalService.open(content1, { centered: true , size: 'sm' },);
    }

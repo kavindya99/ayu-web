@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BooksComponent } from './books/books.component';
+import { AddbookComponent } from './addbook/addbook.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbAlertModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { InquiriesComponent } from './pages/inquiries/inquiries.component';
@@ -16,6 +18,8 @@ import { QuillModule } from 'ngx-quill';
   declarations: [
     LoginComponent,
     AppComponent,
+    BooksComponent,
+    AddbookComponent,
     InquiriesComponent,
 
   ],
