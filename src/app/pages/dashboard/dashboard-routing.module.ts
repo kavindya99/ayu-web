@@ -9,6 +9,7 @@ import { FoodRecipesComponent } from '../food-recipes/food-recipes.component';
 import { HomeComponent } from '../home/home.component';
 import { InquiriesComponent } from '../inquiries/inquiries.component';
 import { OnlineShopComponent } from '../online-shop/online-shop.component';
+import { OrdersComponent } from '../orders/orders.component';
 import { PatientsComponent } from '../patients/patients.component';
 import { PaymentsComponent } from '../payments/payments.component';
 import { YogaClassesComponent } from '../yoga-classes/yoga-classes.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
         { path: 'yoga-class', component: YogaClassesComponent ,/*canActivate:['AuthGuard'],*/},
         { path: 'yoga-poses', component: YogaPosesComponent ,/*canActivate:['AuthGuard'],*/},
         { path: 'inquiries', component: InquiriesComponent ,/*canActivate:['AuthGuard'],*/}, 
+        { path: 'orders', component: OrdersComponent ,/*canActivate:['AuthGuard'],*/}, 
   ]},
 
 ];

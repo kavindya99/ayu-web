@@ -55,6 +55,9 @@ export class DashboardComponent implements OnInit {
         if (this.router.isActive("dashboard/inquiries", true )) {
           this.title = "inquiries"
         }
+        if (this.router.isActive("dashboard/orders", true )) {
+          this.title = "orders"
+        }
       }
     });
   }

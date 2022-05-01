@@ -36,6 +36,7 @@ import { YogaPosesComponent } from '../yoga-poses/yoga-poses.component';
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule, 
+    FormsModule
   ]
 })
 export class DashboardModule { }

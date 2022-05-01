@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
 })
 export class OnlineShopComponent implements OnInit {
 
+  model: any;
+
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {

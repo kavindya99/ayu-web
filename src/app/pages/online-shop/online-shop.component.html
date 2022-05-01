@@ -14,8 +14,16 @@
                     </div>
                 </div>
             </form>
-            <div class="float-right">
+            <!-- <div class="float-right">
                 <button class="btn-light-green" (click)="addItem(content2)">Add Medicine</button>
+            </div> -->
+            <div role="group" ngbRadioGroup name="radioBasic" [(ngModel)]="model" class="float-right">
+              <a ngbButtonLabel class="btn-light-green text-white m-5 mb-0" style="text-decoration: none;" (click)="addItem(content2)">
+                <input ngbButton type="radio" class="btn-check" [value]="1"> Add Medicine
+              </a>
+              <a ngbButtonLabel class="btn-light-green text-white" style="text-decoration: none;" [routerLink]="['../orders']">
+                <input ngbButton type="radio" class="btn-check" [value]="2"> Orders
+              </a>
             </div>
         </div>
         <div class="table-responsive pt-md-4">
@@ -25,21 +33,21 @@
                 <th scope="col" class="rounded-start">Medicine</th>
                 <th scope="col">Category</th>
                 <th scope="col">Unit</th>
-                <th scope="col">Price(Unit)</th>
+                <th scope="col">Price (Unit)</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Sold(Unit)</th>
-                <th scope="col">Income</th>
+                <th scope="col">Sold (Amount)</th>
+                <th scope="col">Available Quantity</th>
                 <!-- <th scope="col">Profit</th> -->
                 <th scope="col"></th>
                 <th scope="col" class="rounded-end"></th>
               <tr>
-                <th scope="row" style="max-width: 200px;" class="text-color">Meetama Kamburukola Meetama Kamburukola Meetama Kamburukola</th>
+                <th scope="row" style="max-width: 200px;" class="text-color">This is the name of the medicine</th>
                 <td>Kasaya</td>
                 <td>Manchandi</td>
                 <td>50</td>
                 <td>300</td>
                 <td>50</td>
-                <td>500</td>
+                <td>200</td>
                 <!-- <td>100</td> -->
                 <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i
                       class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button></td>

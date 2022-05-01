@@ -21,6 +21,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
+    this.playSound();
+  }
+
+  playSound(){
+    let audio = new Audio();
+    audio.src = "../../assets/videoplayback.wav";
+    audio.load();
+    audio.play();
   }
 
   forgotPassword(content1: any) {

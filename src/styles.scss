@@ -21,6 +21,10 @@ td{
     background-color: $primary-color;
 }
 
+.bg-color-light{
+    background-color: $secondary-color-two;
+}
+
 .text-color{
     color: $primary-color;
     text-shadow: $shadow-text;
@@ -28,7 +32,8 @@ td{
 
 .text-color-light{
     color: $secondary-color-two;
-    text-shadow: $shadow-text;
+    text-shadow: none;
+    // text-shadow: $shadow-text;
 }
 
 .shadow-elements{

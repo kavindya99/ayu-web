@@ -1,0 +1,153 @@
+<div class="container">
+    <div class="sub-pages">
+      <div class="p-4">
+        <div class="d-flex flex-row flex-wrap justify-content-between pt-md-5 mt-md-4">
+            <form class="col-12 col-md-6 col-xl-4 px-0 mr-md-3 pb-3">
+                <div class="form-group mb-0">
+                    <div class="input-group input-group-alternative">
+                        <input class="form-control w-50 shadow-elements search-input"
+                            placeholder="Search Orders . . ." type="text">
+                        <div class="">
+                            <span class="input-group-text search-icon"><i
+                                    class="fas fa-search p-1 text-color"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- <div class="float-right">
+                <button class="btn-light-green" (click)="addItem(content2)">Add Medicine</button>
+            </div> -->
+            <div role="group" ngbRadioGroup name="radioBasic" [(ngModel)]="model" class="float-right">
+              <!-- <a ngbButtonLabel class="btn-light-green" style="text-decoration: none;" (click)="addItem(content2)">
+                <input ngbButton type="radio" class="btn-check" [value]="1"> Add Medicine
+              </a> -->
+              <a ngbButtonLabel class="btn-light-green text-white" style="text-decoration: none;" [routerLink]="['../online-shop']">
+                <input ngbButton type="radio" class="btn-check" [value]="2"> Back to Shop
+              </a>
+            </div>
+        </div>
+        <div class="table-responsive pt-md-4">
+          <table class="table table-bordered bg-light rounded shadow-elements">
+            <tbody>
+              <tr class="bg-color text-white text-center rounded">
+                <th scope="col" class="rounded-start">ID</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Delivary Address</th>
+                <th scope="col">Phone No</th>
+                <th scope="col" class="rounded-end">Products</th>
+              <tr>
+                <th scope="row" style="max-width: 200px;" class="text-color">01</th>
+                <td>001</td>
+                <td>250</td>
+                <td>no delivered</td>
+                <td>1st Lane, Kandy</td>
+                <td>070 3532119</td>
+                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i class="fas fa-shopping-cart text-color shadow-elements py-2 px-3 rounded"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <nav aria-label="...">
+          <ul class="pagination justify-content-center">
+            <a class="page-link text-color-light" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+            <li class="page-item"><a class="page-link text-color-light" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link text-color-light" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link text-color-light" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link text-color-light" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+<!--edit medicine starts here-->
+<ng-template #content1 let-modal>
+    <div class="modal-header bg-color text-white">
+        <h5 class="modal-title" id="personalInfo">Products in the cart</h5>
+      </div>
+      <div class="modal-body text-color">
+        <div class="table-responsive pt-md-4">
+            <table class="table table-bordered bg-light rounded shadow-elements">
+              <tbody>
+                <tr class="bg-color text-white text-center rounded">
+                  <th scope="col" class="rounded-start">Product Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                </tr>
+                <tr>
+                  <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
+                  <td>100</td>
+                  <td>250</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
+                    <td>100</td>
+                    <td>250</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
+                    <td>100</td>
+                    <td>250</td>
+                  </tr>
+                <tr>
+                    <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
+                    <td>100</td>
+                    <td>250</td>
+                  </tr>
+                <tr class="text-color">
+                    <th colspan="2">Total</th>
+                    <td scope="col">250</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+</ng-template>
+
+<!--add medicine starts here-->
+<ng-template #content2 let-modal>
+    <div class="modal-header bg-color text-white">
+        <h5 class="modal-title" id="personalInfo">Add Medicine</h5>
+      </div>
+      <div class="modal-body text-color">
+        <form action="" class="p-5">
+          <div class="pb-4">
+              <input type="text" class="inputs text-color form-control" id="Medicine" placeholder="Medicine">
+          </div>
+          <div class="pb-4">
+            <select class="inputs text-color form-select" aria-label="Default select example">
+              <option selected disabled>Category</option>
+              <option value="1">Category one</option>
+              <option value="2">Category two</option>
+              <option value="3">Category Three</option>
+            </select>
+          </div>
+          <div class="pb-4">
+            <input type="text" class="inputs text-color form-control" id="Unit" placeholder="Unit">
+          </div>
+          <div class="pb-4">
+              <input type="text" class="inputs text-color form-control" id="Price" placeholder="Price Per Unit">
+          </div>
+          <div class="pb-4">
+              <input type="text" class="inputs text-color form-control" id="Quantity" placeholder="Available Quantity">
+          </div>
+          <div class="d-flex justify-content-end pt-3">
+            <button class="btn-dark-green px-5" (click)=" SuccessEditMessage ()">Add</button>
+          </div>
+        </form>
+      </div>
+</ng-template>
+
+
+
+
