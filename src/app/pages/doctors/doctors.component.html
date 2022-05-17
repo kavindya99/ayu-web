@@ -104,7 +104,7 @@
                     </ng-template>
                   </td>
               <td>{{doctor.availableTimeFrom}} - {{doctor.availableTimeTo}}</td>
-              <td class=" d-flex flex-column"*ngFor="let service of serviceType ; let i = index"><div>{{service}}</div></td>
+              <td class=" d-flex flex-column"><div *ngFor="let i of doctor.serviceType.split(',')">{{i}}</div></td>
               <td class="text-center">Active</td>
               <!-- <td>{{doctor.status}}</td> -->
               <td class="text-center">

@@ -23,13 +23,38 @@ export class DoctorsComponent implements OnInit {
   apiUrl = environment.backend_url;
   serviceType:any;
   p: number = 1; key:string=''; focus: any; focus2: any;
+  serviceBy:any=[];
+  length:any;
+  oneByOne:any;
+
+
 
   getDoctors(){
     this.http.get(this.apiUrl+'/user/doctors').subscribe(res=>{      
       this.doctors = res;
-      console.log(res);
+      console.log(this.doctors);
+
+      // for(var p of this.doctors.length){
+      //   //this.serviceBy = p.serviceType.split(',');
+      //   console.log(p);
+      // }
+
+      this.doctors.forEach( (value: any) => {
+        console.log(value.serviceType.split(','));
+        let service =value.serviceType.split(',');
+        this.doctors['serviceType'].push(service);
+      }); 
+
+      console.warn(this.doctors);
+
+
+      //console.warn(this.serviceBy);
       this.serviceType=this.doctors[0].serviceType.split(',');
-      console.log(this.serviceType);
+      //this.length=this.doctors[0].serviceType.split(',').length;
+      // for(var l of this.length){
+      //   this.oneByOne=this.serviceType[l];
+      // }
+      //console.log(this.oneByOne);
     })
   }
 
