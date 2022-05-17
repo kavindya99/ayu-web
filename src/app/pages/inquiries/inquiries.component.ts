@@ -1,6 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { AyuService } from 'src/app/ayu.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-inquiries',
@@ -9,14 +13,22 @@ import { AyuService } from 'src/app/ayu.service';
 })
 export class InquiriesComponent implements OnInit {
 
-  items$!:Observable<any[]>;
-  constructor(private service: AyuService, /*private formBuilder: FormBuilder*/) { }
+  constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
   ngOnInit(): void {
-    // this.getAllBooks();
-    // this.init();
-    this.items$=this.service.getInquiries();
-    console.log(this.items$);
+    this.getInquires();
+  }
+
+  inquires:any=[]
+  apiUrl = environment.backend_url;
+  serviceType:any;
+  p: number = 1; key:string=''; focus: any; focus2: any;
+
+  getInquires(){
+    this.http.get(this.apiUrl+'/api/Inquiries').subscribe(res=>{      
+      this.inquires = res;
+      console.log(res);
+    })
   }
 
 }

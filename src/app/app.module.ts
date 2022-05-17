@@ -11,6 +11,7 @@ import { NgbAlertModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng
 import { InquiriesComponent } from './pages/inquiries/inquiries.component';
 import { QuillModule } from 'ngx-quill';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
     ToastrModule.forRoot(), 
     [NgbModule],
     [NgbPaginationModule, NgbAlertModule],
-    QuillModule
+    QuillModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

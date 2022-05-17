@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true
+  production: true,
+  //backend_url: 'https://localhost:5001'
+  backend_url: 'https://triveda.azurewebsites.net'
 };
 
 /*

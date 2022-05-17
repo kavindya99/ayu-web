@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AyuService } from 'src/app/ayu.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,9 +14,20 @@ import Swal from 'sweetalert2';
 
 export class PaymentsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
   ngOnInit(): void {
+    this.getFees();
+  }
+
+  fees:any=[]
+  apiUrl = environment.backend_url;
+
+  getFees(){
+    this.http.get(this.apiUrl+'/api/Fees').subscribe(res=>{
+      console.log(res);
+      this.fees = res;
+    })
   }
 
   accountInfo(content: any) {

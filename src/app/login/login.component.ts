@@ -38,19 +38,28 @@ export class LoginComponent implements OnInit {
   public loginFunction():void{
     this.service.login(this.loginForm.value).subscribe(result=>{
       localStorage.setItem('token',result.token);
-      console.log("logged in");
-      this.router.navigate(['/dashboard']);
-      this.SuccessMessage();
+      console.log(result.role);
+      
+      if(result.role==0){
+        this.router.navigate(['/dashboard']);
+        this.SuccessMessage();
+        console.log("logged in");
+      }else{
+        this.ErrorMessage("User does not have permission to logged in.");
+      }
+      //this.router.navigate(['/dashboard']);
+      
       // this.toastr.success('Successfully Logged In');
     },
     err=>{
       if(err.status == 400){        
         console.log("error");
-        this.ErrorMessage();
+        this.ErrorMessage("Incorrect username or password \nAuthentication failed");
         // this.toastr.error('Incorrect username or password','Authentication failed');
       }
       else{
         console.log(err);
+        this.ErrorMessage(err);
       }
     });
   }
@@ -62,7 +71,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ErrorMessage () {
+  ErrorMessage (error: any) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -73,7 +82,7 @@ export class LoginComponent implements OnInit {
     
     Toast.fire({
       icon: 'error',
-      title: "Login Failed"
+      title: error
     })
   }
   

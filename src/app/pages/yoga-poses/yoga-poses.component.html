@@ -6,7 +6,7 @@
                     <div class="form-group mb-0">
                         <div class="input-group input-group-alternative">
                             <input class="form-control w-50 shadow-elements search-input"
-                                placeholder="Search yoga poses . . ." type="text">
+                                placeholder="Search yoga poses . . ." type="text" (focus)="focus = true" (blur)="focus = false" [(ngModel)]="key" (ngModelChange)="p = 1">
                             <div class="">
                                 <span class="input-group-text search-icon"><i
                                         class="fas fa-search p-1 text-color"></i></span>
@@ -16,6 +16,53 @@
                 </form>
                 <div class="float-right">
                     <button class="btn-light-green" (click)="addInfo(content2)">Add Pose</button>
+                    <!--add modal starts here-->
+                    <ng-template #content2 let-modal>
+                        <div class="modal-header bg-color text-white">
+                            <h5 class="modal-title" id="add">Add Pose</h5>
+                        </div>
+                        <div class="modal-body text-color">
+                            <form action="" class="p-5">
+                                <div class="pb-4">
+                                    <input type="text" class="inputs text-color form-control" id="Name" placeholder="Name" required>
+                                </div>
+                                <div class="pb-4">
+                                    <input type="text" class="inputs text-color form-control" id="Description" placeholder="Description">
+                                </div>
+                                <div class="pb-4">
+                                    <input type="text" class="inputs text-color form-control" id="steps" placeholder="Steps">
+                                </div>
+                                <div class="" id="AddField"></div>
+                                <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="add()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>      
+                                <div class="pb-4">
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                        <div class="img-container">
+                                            <img class="card-image" src="../../../assets/img/prof.jpg"  alt="..." style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"/>
+                                            <label for="file"><a class="btn btn-sm btn-default p-2 px-4"><i class="fas fa-pencil-alt"></i> edit</a></label>
+                                            <input type="file" id="file" name="profile_picture" placeholder="profile" class="card-header__edit"  hidden>
+                                        </div>
+                                        <!-- <span class="w-100 text-left">
+                                            <br>
+                                            <div class="alert alert-danger" role="alert"></div>
+                                        </span> -->
+                                        </div>
+                                    </div>
+                                </div>             
+                                <div class="pb-4">
+                                    <select class="inputs text-color form-select" aria-label="Default select example">
+                                        <option selected disabled>Type</option>
+                                        <option value="1">yoga type 1</option>
+                                        <option value="2">2 pm</option>
+                                        <option value="3">3 pm</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button class="btn-dark-green px-5">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
             <div class="table-responsive pt-md-4">
@@ -28,17 +75,85 @@
                             <th scope="col">Steps</th>
                             <th scope="col"></th>
                             <th scope="col" class="rounded-end"></th>
-                        <tr>
-                            <th scope="row" class="text-color">Yoga 1</th>
-                            <td>yoga type 1</td>
+                        <tr *ngFor="let pose of poses| filter:key">
+                            <th scope="row" class="text-color">{{pose.name}}</th>
+                            <td>{{pose.category}}</td>
                             <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><i
                                         class="fas fa-photo-video text-warning shadow-elements py-2 px-3 rounded"></i></button>
+                                        <!--image or video view modal starts here-->
+                                        <ng-template #content3 let-modal>
+                                            <div class="modal-header bg-warning text-white">
+                                                <h5 class="modal-title" id="personalInfo">Image/Video</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <img src="../../../assets/img/prof.jpg" class="w-100" alt="">
+                                                </div>
+                                            </div>
+                                        </ng-template>
                             </td>
                             <td class="text-center"><button class="btn-table btn-default" (click)="viewSteps(content4)"><i
                                         class="fas fa-list-ul text-default shadow-elements py-2 px-3 rounded"></i></button>
+                                        <!--steps modal starts here-->
+                                        <ng-template #content4 let-modal>
+                                            <div class="modal-header bg-dark text-white">
+                                                <h5 class="modal-title" id="personalInfo">Steps</h5>
+                                            </div>
+                                            <div class="modal-body text-color" *ngFor="let step of steps ; let i = index">
+                                                <div class="text-dark">Step {{i+1}}</div>
+                                                <div class="text-dark" style="padding-left: 20px;">{{step}}</div>
+                                            </div>
+                                        </ng-template>
                             </td>
                             <td class="text-center"><button class="btn-table btn-default" (click)="editInfo(content1)"><i
                                         class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button>
+                                        <!--edit modal starts here-->
+                                        <ng-template #content1 let-modal>
+                                            <div class="modal-header bg-color text-white">
+                                                <h5 class="modal-title" id="add">Edit Pose</h5>
+                                            </div>
+                                            <div class="modal-body text-color">
+                                                <form action="" class="p-5">
+                                                    <div class="pb-4">
+                                                        <input type="text" class="inputs text-color form-control" id="Name" placeholder="Name" required>
+                                                    </div>
+                                                    <div class="pb-4">
+                                                        <input type="text" class="inputs text-color form-control" id="Description" placeholder="Description">
+                                                    </div>
+                                                    <div class="pb-4">
+                                                        <input type="text" class="inputs text-color form-control" id="steps" placeholder="Steps">
+                                                    </div>
+                                                    <div class="" id="AddField"></div>
+                                                    <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="add()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>   
+                                                    <div class="pb-4">
+                                                        <div class="form-row">
+                                                            <div class="form-group col-12">
+                                                            <div class="img-container">
+                                                                <img class="card-image" src="../../../assets/img/prof.jpg"  alt="..." style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"/>
+                                                                <label for="file"><a class="btn btn-sm btn-default p-2 px-4"><i class="fas fa-pencil-alt"></i> edit</a></label>
+                                                                <input type="file" id="file" name="profile_picture" placeholder="profile" class="card-header__edit"  hidden>
+                                                            </div>
+                                                            <!-- <span class="w-100 text-left">
+                                                                <br>
+                                                                <div class="alert alert-danger" role="alert"></div>
+                                                            </span> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>                
+                                                    <div class="pb-4">
+                                                        <select class="inputs text-color form-select" aria-label="Default select example">
+                                                            <option selected disabled>Type</option>
+                                                            <option value="1">yoga type 1</option>
+                                                            <option value="2">2 pm</option>
+                                                            <option value="3">3 pm</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end pt-3">
+                                                        <button class="btn-dark-green px-5">Edit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </ng-template>
                             </td>
                             <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
                                         class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button>
@@ -67,133 +182,3 @@
         </div>    
     </div>
 </div>
-
-    <!-- Main div and ADD button is created -->
-    <div class="showInputField" id="hi"></div>
-    
-    <!-- The add() function is called -->
-    <button (click)="add()">ADD</button>
-
-<!--edit modal starts here-->
-<ng-template #content1 let-modal>
-    <div class="modal-header bg-color text-white">
-        <h5 class="modal-title" id="add">Edit Pose</h5>
-    </div>
-    <div class="modal-body text-color">
-        <form action="" class="p-5">
-            <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="Name" placeholder="Name" required>
-            </div>
-            <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="Description" placeholder="Description">
-            </div>
-            <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="steps" placeholder="Steps">
-            </div>
-            <div class="" id="AddField"></div>
-            <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="add()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>   
-            <div class="pb-4">
-                <div class="form-row">
-                    <div class="form-group col-12">
-                      <div class="img-container">
-                        <img class="card-image" src="../../../assets/img/prof.jpg"  alt="..." style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"/>
-                        <label for="file"><a class="btn btn-sm btn-default p-2 px-4"><i class="fas fa-pencil-alt"></i> edit</a></label>
-                        <input type="file" id="file" name="profile_picture" placeholder="profile" class="card-header__edit"  hidden>
-                      </div>
-                      <!-- <span class="w-100 text-left">
-                        <br>
-                        <div class="alert alert-danger" role="alert"></div>
-                      </span> -->
-                    </div>
-                  </div>
-            </div>                
-            <div class="pb-4">
-                <select class="inputs text-color form-select" aria-label="Default select example">
-                    <option selected disabled>Type</option>
-                    <option value="1">yoga type 1</option>
-                    <option value="2">2 pm</option>
-                    <option value="3">3 pm</option>
-                </select>
-            </div>
-            <div class="d-flex justify-content-end pt-3">
-                <button class="btn-dark-green px-5">Edit</button>
-            </div>
-        </form>
-    </div>
-    </ng-template>
-
-
-<!--add modal starts here-->
-<ng-template #content2 let-modal>
-    <div class="modal-header bg-color text-white">
-        <h5 class="modal-title" id="add">Add Pose</h5>
-    </div>
-    <div class="modal-body text-color">
-        <form action="" class="p-5">
-            <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="Name" placeholder="Name" required>
-            </div>
-            <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="Description" placeholder="Description">
-            </div>
-            <div class="pb-4">
-                <input type="text" class="inputs text-color form-control" id="steps" placeholder="Steps">
-            </div>
-            <div class="" id="AddField"></div>
-            <div class="d-flex justify-content-end"><button class="btn-table btn-default mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Step" (click)="add()"><i class="fas fa-plus text-color shadow-elements py-2 px-3 rounded"></i></button></div>      
-            <div class="pb-4">
-                <div class="form-row">
-                    <div class="form-group col-12">
-                      <div class="img-container">
-                        <img class="card-image" src="../../../assets/img/prof.jpg"  alt="..." style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"/>
-                        <label for="file"><a class="btn btn-sm btn-default p-2 px-4"><i class="fas fa-pencil-alt"></i> edit</a></label>
-                        <input type="file" id="file" name="profile_picture" placeholder="profile" class="card-header__edit"  hidden>
-                      </div>
-                      <!-- <span class="w-100 text-left">
-                        <br>
-                        <div class="alert alert-danger" role="alert"></div>
-                      </span> -->
-                    </div>
-                  </div>
-            </div>             
-            <div class="pb-4">
-                <select class="inputs text-color form-select" aria-label="Default select example">
-                    <option selected disabled>Type</option>
-                    <option value="1">yoga type 1</option>
-                    <option value="2">2 pm</option>
-                    <option value="3">3 pm</option>
-                </select>
-            </div>
-            <div class="d-flex justify-content-end pt-3">
-                <button class="btn-dark-green px-5">Add</button>
-            </div>
-        </form>
-    </div>
-</ng-template>
-
-<!--image or video view modal starts here-->
-<ng-template #content3 let-modal>
-    <div class="modal-header bg-warning text-white">
-        <h5 class="modal-title" id="personalInfo">Image/Video</h5>
-    </div>
-    <div class="modal-body">
-        <div>
-            <img src="../../../assets/img/prof.jpg" class="w-100" alt="">
-        </div>
-    </div>
-</ng-template>
-
-<!--steps modal starts here-->
-<ng-template #content4 let-modal>
-    <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="personalInfo">Steps</h5>
-    </div>
-    <div class="modal-body text-color">
-        <div class="text-dark">Step 1</div>
-        <div class="text-dark" style="padding-left: 20px;">Description is here</div>
-        <div class="text-dark">Step 2</div>
-        <div class="text-dark" style="padding-left: 20px;">Description is here</div>
-        <div class="text-dark">Step 3</div>
-        <div class="text-dark" style="padding-left: 20px;">Description is here</div>
-    </div>
-</ng-template>

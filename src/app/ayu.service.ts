@@ -1,17 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import * as _ from 'lodash';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AyuService {
 
-  readonly basePath = "https://localhost:44315/api";
+
+  public basePath = "https://triveda.azurewebsites.net";
+  apiUrl = environment.backend_url;
   constructor(public http: HttpClient) { }
 
+  getDropDownText(id:any, object:any){
+    const selObj = _.filter(object, function (o) {
+        return (_.includes(id,o.id));
+    });
+    return selObj;
+  }
   public getBooks(): Observable<any>{
-    return this.http.get<any>(this.basePath+'/books');
+    return this.http.get<any>(this.apiUrl+'/books');
   }
 
   public addBook(book:any): Observable<any>{
@@ -19,7 +30,7 @@ export class AyuService {
   }
 
   public login(formData:any): Observable<any>{
-    return this.http.post<any>(this.basePath+'/account/login',formData);
+    return this.http.post<any>(this.apiUrl+'/auth/login',formData);
   }
 
 //   login(email:string, password:string ) {
@@ -29,8 +40,8 @@ export class AyuService {
 //         // .shareReplay();
 // }
 
-public getRecipes(): Observable<any>{
-  return this.http.get<any>(this.basePath+'/FoodRecipes');
+public getAllRecipes(): Observable<any>{
+  return this.http.get<any>(this.basePath+'/api/FoodRecipes');
 }
 
 public addRecipe(recipe:any): Observable<any>{

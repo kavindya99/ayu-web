@@ -15,6 +15,11 @@ import { PatientsComponent } from '../patients/patients.component';
 import { PaymentsComponent } from '../payments/payments.component';
 import { YogaClassesComponent } from '../yoga-classes/yoga-classes.component';
 import { YogaPosesComponent } from '../yoga-poses/yoga-poses.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -36,7 +41,10 @@ import { YogaPosesComponent } from '../yoga-poses/yoga-poses.component';
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    ImageCropperModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
   ]
 })
 export class DashboardModule { }

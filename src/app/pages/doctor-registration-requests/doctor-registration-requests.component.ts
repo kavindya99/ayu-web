@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AyuService } from 'src/app/ayu.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,14 +13,31 @@ import Swal from 'sweetalert2';
 })
 export class DoctorRegistrationRequestsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
+
+  ngOnInit(): void {
+    this.getDoctors();
+  }
+
+  public services:any;
+  doctors:any=[]
+  apiUrl = environment.backend_url;
+  serviceType:any;
+  p: number = 1; key:string=''; focus: any; focus2: any;
+
+  getDoctors(){
+    this.http.get(this.apiUrl+'/user/doctor-registrations').subscribe(res=>{      
+      this.doctors = res;
+      console.log(res);
+      this.serviceType=this.doctors[0].serviceType.split(',');
+      console.log(this.serviceType);
+    })
+  }
 
   viewInfo(content: any) {
      this.modalService.open(content, { centered: true });
    }
-
-  ngOnInit(): void {
-  }
+   
   simpleAlert(){
     Swal.fire('Hello world!');
   }

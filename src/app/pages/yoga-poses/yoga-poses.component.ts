@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, VERSION } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,9 +12,40 @@ import Swal from 'sweetalert2';
 })
 export class YogaPosesComponent implements OnInit {
   
-  constructor(private modalService: NgbModal) { }
+  apiUrl = environment.backend_url;
+  poses:any=[]
+  public stepcount:number=0;
+  public count:number=0;
+  public steps:any;
+  public i: any;
+  public pose: any;
+  searchFilter: string ="";
+  p: number = 1; key:string=''; focus: any; focus2: any;
+
+  constructor(private router:Router,private modalService: NgbModal,private http:HttpClient) { }
+
+  getPoses(){
+    this.http.get(this.apiUrl+'/api/YogaPoses').subscribe(result=>{
+      console.log(result);
+      this.poses = result;
+      // for(let i of this.poses ){
+      //   this.pose=this.poses[i]
+      //   console.log(this.pose);
+      // }
+      // this.steps=this.poses[0].steps.split(',')[0];
+      // console.log(this.steps);
+      // this.stepcount=this.steps.count;
+      // console.log(this.stepcount);
+
+      this.steps=this.poses[0].steps.split(',');
+      this.stepcount=this.poses.count;
+      // console.log(result);
+      this.count=this.poses[0].steps.split(',').count;
+    })
+  }
 
   ngOnInit(): void {
+    this.getPoses();
   }
 
   editInfo(content1: any) {

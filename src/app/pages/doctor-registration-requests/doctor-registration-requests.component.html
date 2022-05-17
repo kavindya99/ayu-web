@@ -6,7 +6,7 @@
             <div class="form-group mb-0">
               <div class="input-group input-group-alternative">
                 <input class="form-control w-50 shadow-elements search-input" placeholder="Search doctor registrations . . ."
-                  type="text">
+                  type="text" (focus)="focus = true" (blur)="focus = false" [(ngModel)]="key" (ngModelChange)="p = 1">
                   <div class="">
                     <span class="input-group-text search-icon"><i class="fas fa-search p-1 text-color"></i></span>
                   </div>
@@ -19,16 +19,81 @@
             <tbody>
               <tr class="bg-color text-white text-center rounded">
                 <th scope="col" class="rounded-start">Doctor Name</th>
-                <th scope="col">Date</th>
+                <!-- <th scope="col">Date</th> -->
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col" class="rounded-end"></th>
-              <tr>
-                <th scope="row" class="text-color">Jeewandara Banadara Wijewardhana</th>
-                <td>1st April</td>
+              <tr *ngFor="let doctor of doctors| filter:key">
+                <th scope="row" class="text-color">{{doctor.name}}</th>
+                <!-- <td>1st April</td> -->
                 <td class="text-center"><button class="btn-table btn-default" (click)="viewInfo(content)" placement="top" ngbTooltip="View Doctor Info" type="button"
                     ><i
-                      class="fab fa-wpforms text-color shadow-elements py-2 px-3 rounded"></i></button></td>
+                      class="fab fa-wpforms text-color shadow-elements py-2 px-3 rounded"></i></button>
+                      <!--view details modal starts here-->
+                      <ng-template #content let-modal>
+                        <div class="modal-header bg-color text-white">
+                            <h5 class="modal-title" id="personalInfo">Doctor Registration Form Details</h5>
+                          </div>
+                          <div class="modal-body text-color">
+                              <div class="text-color-light pb-2">Personal Info</div>
+                              <div class="row">
+                                  <div class="col-4">Name</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.name}}</div>
+                              </div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Gender</div>
+                                  <div class="col-1">:</div>
+                                  <div *ngIf="doctor.gender == 1 " class="col-7">Female</div>
+                                  <div *ngIf="doctor.gender == 0 " class="col-7">Male</div>
+                                  
+                              </div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Email</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.email}}</div>
+                              </div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Contact No.</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.phoneNumber}}</div>
+                              </div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Address</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.lane}}, {{doctor.district}}, {{doctor.province}}</div>
+                              </div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Available Time</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">From : {{doctor.availableTimeFrom}} <br> To : {{doctor.availableTimeTo}}</div>
+                              </div>
+                              <div class="row pb-3">
+                                  <div class="col-4">Service</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7" >
+                                    <div class=" d-flex flex-column"*ngFor="let service of serviceType ; let i = index">{{service}}</div>
+                                  </div>
+                              </div>
+                              <div class="text-color-light pb-2">Proffesional Info</div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Doctor ID</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.medicalCouncilRegID}}</div>
+                              </div>
+                              <div class="row pb-1">
+                                  <div class="col-4">Hospital</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.hospital}}</div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-4">Specialization</div>
+                                  <div class="col-1">:</div>
+                                  <div class="col-7">{{doctor.specialization}}</div>
+                              </div>
+                          </div>
+                      </ng-template>
+                    </td>
                 <td class="text-center"><button class="btn-table btn-default" (click)="approveMessage()"><i
                       class="fas fa-thumbs-up text-primary shadow-elements py-2 px-3 rounded"></i></button></td>
                 <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
@@ -57,70 +122,4 @@
         </nav>
       </div>
     </div>
-  </div>
-  
-
-  <!--view details modal starts here-->
-  <ng-template #content let-modal>
-    <div class="modal-header bg-color text-white">
-        <h5 class="modal-title" id="personalInfo">Doctor Registration Form Details</h5>
-      </div>
-      <div class="modal-body text-color">
-          <div class="text-color-light pb-2">Personal Info</div>
-          <div class="row">
-              <div class="col-4">Name</div>
-              <div class="col-1">:</div>
-              <div class="col-7">Jeewandara Banadara Wijewardhana</div>
-          </div>
-          <div class="row pb-1">
-              <div class="col-4">Gender</div>
-              <div class="col-1">:</div>
-              <div class="col-7">Female</div>
-          </div>
-          <div class="row pb-1">
-              <div class="col-4">Email</div>
-              <div class="col-1">:</div>
-              <div class="col-7">jeewandara@gmail.com</div>
-          </div>
-          <div class="row pb-1">
-              <div class="col-4">Contact No.</div>
-              <div class="col-1">:</div>
-              <div class="col-7">070 4420987</div>
-          </div>
-          <div class="row pb-1">
-              <div class="col-4">Address</div>
-              <div class="col-1">:</div>
-              <div class="col-7">1st Lane, avenra road, Ratnapura</div>
-          </div>
-          <div class="row pb-1">
-              <div class="col-4">Available Time</div>
-              <div class="col-1">:</div>
-              <div class="col-7">From : 5.00pm <br> To : 7.00pm</div>
-          </div>
-          <div class="row pb-3">
-              <div class="col-4">Service</div>
-              <div class="col-1">:</div>
-              <div class="col-7">Channel <br>Online Consulting <br>Online Yoga Class</div>
-          </div>
-          <div class="text-color-light pb-2">Proffesional Info</div>
-          <div class="row pb-1">
-              <div class="col-4">Doctor ID</div>
-              <div class="col-1">:</div>
-              <div class="col-7">10707360</div>
-          </div>
-          <div class="row pb-1">
-              <div class="col-4">Hospital</div>
-              <div class="col-1">:</div>
-              <div class="col-7">Ratnapura</div>
-          </div>
-          <div class="row">
-              <div class="col-4">Specialization</div>
-              <div class="col-1">:</div>
-              <div class="col-7">Eye Specialist</div>
-          </div>
-      </div>
-</ng-template>
-
-
-
-
+  </div>  
