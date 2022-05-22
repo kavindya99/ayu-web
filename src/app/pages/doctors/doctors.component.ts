@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./doctors.component.scss']
 })
 export class DoctorsComponent implements OnInit {
+  getMedicineForDelete: any;
+  medicines: any;
+  updateMedicineID: any;
+  response: any;
+  updateMedicineForm: any;
 
   constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
@@ -34,17 +39,6 @@ export class DoctorsComponent implements OnInit {
       this.doctors = res;
       console.log(this.doctors);
 
-      // for(var p of this.doctors.length){
-      //   //this.serviceBy = p.serviceType.split(',');
-      //   console.log(p);
-      // }
-
-      this.doctors.forEach( (value: any) => {
-        console.log(value.serviceType.split(','));
-        let service =value.serviceType.split(',');
-        this.doctors['serviceType'].push(service);
-      }); 
-
       console.warn(this.doctors);
 
 
@@ -56,6 +50,62 @@ export class DoctorsComponent implements OnInit {
       // }
       //console.log(this.oneByOne);
     })
+  }
+
+  del_res:any;
+
+  activateDoctor(){
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('accept', 'text/plain');
+    
+    this.http.get(this.apiUrl+'/user/doctors/'+this.getMedicineForDelete
+    ,{
+      headers: headers,
+      reportProgress:true,
+      observe:'events',
+  
+    }
+    ).subscribe(res=>{
+      console.log(res);
+      this.del_res = res;
+      console.log(this.del_res.status);
+      if (this.del_res.status == 200){
+        //this.getMedicineById();
+        console.log("deleted")
+      }
+      else{
+        console.log('failed');
+      }
+      this.modalService.dismissAll();
+      this.getDoctors();
+    })
+  }
+
+  getDoctorForActivate(){
+    this.http.get(this.apiUrl+'/user/activate-doctor/'+this.updateMedicineID,{observe: 'response'}).subscribe(res=>{
+      this.response = res;
+      console.log(this.response.status);
+      console.log(this.updateMedicineID);
+      console.log(this.response.body);
+        //console.log(this.selected_medicine_response.medicine);
+        if(this.response.status==200){
+          this.updateMedicineForm.patchValue({
+            Medicine:this.response.body.medicine,
+            Category:this.response.body.category,
+            Unit:this.response.body.unit,
+            PricePerUnit:this.response.body.pricePerUnit,
+            Quantity:this.response.body.quantity,
+          })
+        } else{
+          console.log(this.response.status);
+        }       
+    })
+  }
+
+  openDelete(content6: any,id: any) {
+    this.getMedicineForDelete = id;
+    this.modalService.open(content6, { centered: true });
   }
 
   editInfo(content3: any) {
