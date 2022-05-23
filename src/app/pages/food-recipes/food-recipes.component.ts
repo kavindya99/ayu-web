@@ -1,12 +1,13 @@
-import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AyuService } from 'src/app/ayu.service';
 import { RecipeDetails } from 'src/app/recipe-details';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -18,132 +19,216 @@ import Swal from 'sweetalert2';
 export class FoodRecipesComponent implements OnInit {
 
   // recipe$!:Observable<any[]>;
-  public recipeForm!:FormGroup;
-  public recipes:any;  
-  public ingreds:any;
-  public count:number=0;
-  public stepcount:number=0;
-  public steps:any;
-  public amount:any;
-
+  
+  updateFoodForm:any;
+  addFoodForm:any;
   recipe=new RecipeDetails();
   p: number = 1; key:string=''; focus: any; focus2: any;
+  recipes: any;
+  getFoodRecipeForDelete: any;
+
+  apiUrl = environment.backend_url;
+  updateFoodID: any;
+  showAllData: any;
+
   constructor(private formBuilder:FormBuilder,private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
   ngOnInit(): void {
-    // this.getAllBooks();
-    // this.init();
+    this.foodFormValidations();
     this.getRecipes();
+    this.updateFoodFormValidations();
   }
 
   private getRecipes(): void{
     this.service.getAllRecipes().subscribe(result=>{
       this.recipes = result;
       console.log(result);
-      let i=1;
-      this.steps=result[i].steps.split(',');
-      this.stepcount=result.count;
-      // console.log(result);
-      this.count=result[i].steps.split(',').count;
-      // console.log(result[0].steps.split(','));
-      // console.log(result);
-      this.ingreds=result[i].ingredients.split(',');
-      //this.amount=this.ingreds.split(':')[1];
-      console.log(this.steps);
-      //console.log(this.amount);
     });
   }
 
-  // level = [
-  //   {
-  //     id: 1,
-  //     name: 'Cooked Food',
+  //add food
 
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'UnCooked Food',
+  foodFormValidations() {
 
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Sweet Items',
-
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Beverages',
-
-  //   },
-  // ];
-
-  // mySelect = '2';
-  // selectedValue: any;
-
-  // selectChange() {
-  //   this.selectedValue = this.service.getDropDownText(this.mySelect, this.level)[0].name;
-  // }
-
-  // addVacancy(){
-
-
-  //   const fd = new FormData();
-  //   fd.append('Name',this.recipe.Name);
-  //   fd.append('Category',this.selectedValue);
-  //   fd.append('Image',this.recipe.Image);
-  //   fd.append('Steps',this.recipe.Steps);
-  //   fd.append('Ingredients',this.recipe.Ingredients);
-
-
-  //   console.log(this.recipe.Name);
-  //   console.log(this.recipe.Image);
-  //   console.log(this.recipe.Steps);
-  //   console.log(this.recipe.Ingredients);
-
-
-  //   this.http.post('https://localhost:5001/api/FoodRecipes',fd,{
-  //     reportProgress:true,
-  //     observe:'events'
-
-  //   }).subscribe((event:HttpEvent<any>) =>{
-  //     switch (event.type){
-  //       case HttpEventType.Sent:
-  //         console.log('Request has been made!');
-  //         break;
-  //       case HttpEventType.ResponseHeader:
-  //         console.log('Response header has been received!');
-  //         break;
-  //       case HttpEventType.UploadProgress:
-  //       break;
-  //       case HttpEventType.Response:
-  //       console.log(event);
-  //     }
-  //   })
-
-  // }
-
-  public saveRecipe():void{
-    this.service.addRecipe(this.recipeForm.value).subscribe(result=>{
-      alert("new recipe added");
+    this.addFoodForm = new FormGroup({ 
+      'Name': new FormControl(null),
+      'Category': new FormControl(null),
+      'Ingredients': new FormControl(null),
+      'Steps': new FormControl(null)
     });
   }
+
+  addFoodRecipe(){
+
+    console.log(this.addFoodForm.value);
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    
+    const fd = new FormData();
+    fd.append('Name',this.addFoodForm.value.Name);
+    fd.append('Category',this.addFoodForm.value.Category);
+    fd.append('Ingredients',this.addFoodForm.value.Ingredients);
+    fd.append('Steps',this.addFoodForm.value.Steps);
+
+    this.http.post(this.apiUrl+'/api/FoodRecipes',fd,{
+      headers: headers,
+      reportProgress:true,
+      observe:'events',
+
+    }).subscribe((event:HttpEvent<any>) =>{
+      switch (event.type){
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+        break;
+        case HttpEventType.Response:
+        console.log(event);
+      }
+      this.SuccessMessage("Food Recipe Added Successfully");
+      this.modalService.dismissAll();
+      this.getRecipes();
+    })
+  }
+
+  //edit food
+
+  response:any = [];
+
+  updateFoodFormValidations() {
+
+    this.updateFoodForm = new FormGroup({ 
+      'Name': new FormControl(null),
+      'Category': new FormControl(null),
+      'Ingredients': new FormControl(null),
+      'Steps': new FormControl(null)
+    });
+}
+
+  getMedcineForEdit(){
+    this.http.get(this.apiUrl+'/api/FoodRecipes/food-by-id/'+this.updateFoodID,{observe: 'response'}).subscribe(res=>{
+      this.response = res;
+      console.log(this.response.status);
+      console.log(this.updateFoodID);
+      console.log(this.response.body);
+        //console.log(this.selected_medicine_response.medicine);
+        if(this.response.status==200){
+          this.updateFoodForm.patchValue({
+            Name:this.response.body.name,
+            Category:this.response.body.category,
+            Ingredients:this.response.body.ingredients,
+            Steps:this.response.body.steps,
+          })
+        } else{
+          console.log(this.response.status);
+        }       
+    })
+  }
+
+  updateFood(){
+    console.log(this.updateFoodForm.value.Medicine);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('accept', 'text/plain');
+    
+    const fd = new FormData();
+    console.log(this.updateFoodID);
+    fd.append('Id',this.updateFoodID);
+    fd.append('Name',this.updateFoodForm.value.Name);
+    fd.append('Category',this.updateFoodForm.value.Category);
+    fd.append('Ingredients',this.updateFoodForm.value.Ingredients);
+    fd.append('Steps',this.updateFoodForm.value.Steps);
+  this.http.post(this.apiUrl+'/api/FoodRecipes/update-food-recipe',fd,{
+    headers: headers,
+    reportProgress:true,
+    observe:'events',
+
+  }).subscribe((event:HttpEvent<any>) =>{
+    switch (event.type){
+      case HttpEventType.Sent:
+        console.log('Request has been made!');
+        break;
+      case HttpEventType.ResponseHeader:
+        console.log('Response header has been received!');
+        break;
+      case HttpEventType.UploadProgress:
+      break;
+      case HttpEventType.Response:
+      console.log(event);
+      this.SuccessMessage("Successfully updated the medicine");
+    }
+    this.modalService.dismissAll();
+    this.getRecipes();    
+  });
+  //this.http.put(this.apiUrl+'/api/Medicines/'+this.updateMedicineID,fd,{ headers: headers }).subscribe(results =>console.log(results));
+}
+
+//delete recipe
+  del_res:any;
+
+  deleteRecipe(){
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('accept', 'text/plain');
+    
+    this.http.get(this.apiUrl+'/api/FoodRecipes/delete/'+this.getFoodRecipeForDelete
+    ,{
+      headers: headers,
+      reportProgress:true,
+      observe:'events',
   
-  // private init(): void{
-  //   this.recipeForm=this.formBuilder.group({
-  //     name:[],
-  //     type:[],
-  //     ingredients:[],
-  //     steps:[],
-  //     image:[],
-  //   });
-  // }
+    }
+    ).subscribe(res=>{
+      console.log(res);
+      this.del_res = res;
+      console.log(this.del_res.status);
+      if (this.del_res.status == 200){
+        //this.getMedicineById();
+        console.log("deleted")
+        this.SuccessMessage("Successfully removed the Recipe");
+      }
+      else{
+        console.log('failed');
+        this.ErrorMessage("Recipe Deletion failed");
+      }
+      this.modalService.dismissAll();
+      this.getRecipes();
+    })
+  }
 
-  editInfo(content1: any) {
+  getMedicineById(){
+    this.http.get(this.apiUrl+'/api/Medicines/getMediById/'+this.getFoodRecipeForDelete,{observe: 'response'}).subscribe(res=>{
+        console.warn(res);
+        this.getFoodRecipeForDelete = res;
+        if (this.getFoodRecipeForDelete.status === 0){
+          console.log("Error!! ");
+        }
+        else{
+          this.showAllData = this.getFoodRecipeForDelete.data;
+  
+        }
+    })
+  }
+
+
+  
+
+  editInfo(content1: any,id:any) {
+    this.updateFoodID=id;
      this.modalService.open(content1, { centered: true });
    }
 
    addInfo(content2: any) {
     this.modalService.open(content2, { centered: true });
+  }
+
+  openDelete(content6: any,id: any) {
+    this.getFoodRecipeForDelete = id;
+    this.modalService.open(content6, { centered: true });
   }
 
   viewSteps(content4: any) {
@@ -154,7 +239,7 @@ export class FoodRecipesComponent implements OnInit {
    this.modalService.open(content3, { centered: true });
  }
 
-  ErrorMessage () {
+  ErrorMessage (text:any) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -165,11 +250,11 @@ export class FoodRecipesComponent implements OnInit {
     
     Toast.fire({
       icon: 'error',
-      title: "Edit Failed"
+      title: text
     })
   }
 
-  SuccessMessage () {
+  SuccessMessage (text:any) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -180,54 +265,7 @@ export class FoodRecipesComponent implements OnInit {
     
     Toast.fire({
       icon: 'success',
-      title: "Editted Successfully"
-    })
-  }
-
-  ErrorAdd () {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 5000,
-      timerProgressBar: false,
-    })
-    
-    Toast.fire({
-      icon: 'error',
-      title: "Adding Failed"
-    })
-  }
-
-  SuccessAdd () {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 5000,
-      timerProgressBar: false,
-    })
-    
-    Toast.fire({
-      icon: 'success',
-      title: "Added Successfully"
-    })
-  }
-
-  cancelMessage(){
-    Swal.fire({
-      title: '<strong>Remove Recipe</strong>',
-      iconHtml: '<i class="fas fa-thumbs-down text-danger bg-white"></i>',
-      
-      html:
-        'Do you want to Remove this recipe?',
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonColor: '#D04848',
-      confirmButtonText:
-        'Remove',
-      cancelButtonText:
-        'Cancel',      
+      title: text
     })
   }
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./doctor-registration-requests.component.scss']
 })
 export class DoctorRegistrationRequestsComponent implements OnInit {
+
+  getDoctor: any;
+  medicines: any;
+  updateMedicineID: any;
+  response: any;
+  updateMedicineForm: any;
 
   constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
@@ -28,44 +34,81 @@ export class DoctorRegistrationRequestsComponent implements OnInit {
   getDoctors(){
     this.http.get(this.apiUrl+'/user/doctor-registrations').subscribe(res=>{      
       this.doctors = res;
-      console.log(res);
+      //console.log(res);
       this.serviceType=this.doctors[0].serviceType.split(',');
-      console.log(this.serviceType);
+      //console.log(this.serviceType);
+      //console.log(this.doctors[0].id);
     })
+  }
+
+  del_res:any;
+
+  activateDoctor(){
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('accept', 'text/plain');
+    
+    this.http.get(this.apiUrl+'/user/activate-doctor/'+this.getDoctor
+    ,{
+      headers: headers,
+      reportProgress:true,
+      observe:'events',
+  
+    }
+    ).subscribe(res=>{
+      console.log(res);
+      this.del_res = res;
+      //console.log(this.del_res.status);
+      if (this.del_res.status == 200){
+        //this.getMedicineById();
+        //console.log("deleted")
+      }
+      else{
+        //console.log('failed');
+      }
+      this.SuccessMessage ();
+      this.modalService.dismissAll();
+      this.getDoctors();
+    })
+  }
+
+  openActivateDoctor(content6: any,id: any) {
+    this.getDoctor = id;
+    this.modalService.open(content6, { centered: true });
   }
 
   viewInfo(content: any) {
      this.modalService.open(content, { centered: true });
    }
-   
-  simpleAlert(){
-    Swal.fire('Hello world!');
-  }
-   
-  alertWithSuccess(){
-    Swal.fire('Thank you...', 'You submitted succesfully!', 'success')
-  }
 
-  approveMessage(){
-    Swal.fire({
-      title: '<strong>Approve Doctor Registration</strong>',
-      iconHtml: '<span class="fas fa-thumbs-up text-color bg-white"></span>',
-      customClass: {
-        icon: 'no-border'
-      },
-      html:
-        'Do you want to Approve this doctor Registration?',
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonColor: '#5F8D88',
-      confirmButtonText:
-        'Approve',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-        'Cancel',
-      cancelButtonAriaLabel: 'Thumbs down',
-      
-    }),2000
+   ErrorMessage (error: any) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: false,
+    })
+    
+    Toast.fire({
+      icon: 'error',
+      title: error
+    })
+  }
+  
+  SuccessMessage () {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: false,
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: "Activated Successfully"
+    })
   }
 
   cancelMessage(){
@@ -84,31 +127,6 @@ export class DoctorRegistrationRequestsComponent implements OnInit {
         'Reject',
       cancelButtonText:
         'Cancel',      
-    })
-  }
-   
-  confirmBox(){
-    Swal.fire({
-      title: 'Are you sure want to remove?',
-      text: 'You will not be able to recover this file!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Deleted!',
-          'Your imaginary file has been deleted.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
-      }
     })
   }
 
