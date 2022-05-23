@@ -15,12 +15,14 @@ import Swal from 'sweetalert2';
 
 export class PaymentsComponent implements OnInit {
   updateFeeID: any;
+  payment: any;
 
   constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.getFees();
     this.updateMedFormValidations();
+    this.getPayment();
   }
 
   fees:any=[]
@@ -30,6 +32,13 @@ export class PaymentsComponent implements OnInit {
     this.http.get(this.apiUrl+'/api/Fees').subscribe(res=>{
       //console.log(res);
       this.fees = res;
+    })
+  }
+
+  getPayment(){
+    this.http.get(this.apiUrl+'/api/DoctorPayments/doctor-payment').subscribe(res=>{      
+      this.payment = res;
+      console.log(this.payment);
     })
   }
 
