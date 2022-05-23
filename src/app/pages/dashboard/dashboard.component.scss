@@ -1,4 +1,9 @@
-@import "../../../styles.scss";
+// @import "../../../styles.scss";
+$primary-color:#5F8D88;
+$shadow-color:rgba(0, 0, 0, 0.20);
+$shadow-text: 1px 2px 4px $shadow-color;
+
+
 body {
   overflow-x: hidden;
 }
