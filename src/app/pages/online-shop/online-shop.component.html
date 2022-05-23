@@ -40,77 +40,86 @@
                 <!-- <th scope="col">Profit</th> -->
                 <th scope="col"></th>
                 <th scope="col" class="rounded-end"></th>
-              <tr *ngFor="let medicine of medicines| filter:key">
-                <th scope="row" style="max-width: 200px;" class="text-color">{{medicine.medicine}}</th>
-                <td>{{medicine.category}}</td>
-                <td>{{medicine.unit}}</td>
-                <td>{{medicine.pricePerUnit}}</td>
-                <td>{{medicine.quantity}}</td>
-                <td>{{medicine.soldAmount}}</td>
-                <td>{{medicine.availableQuantity}}</td>
-                <!-- <td>100</td> -->
-                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1,medicine.id)"><i
-                      class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button>
-                      <!--edit medicine starts here-->
-                      <ng-template #content1 let-modal>
-                        <div class="modal-header bg-color text-white">
-                            <h5 class="modal-title" id="personalInfo">Edit Medicine</h5>
-                            <button type="button" class="close bg-color border-0" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                              <span aria-hidden="true" class="text-white">&times;</span>
-                          </button>
-                          </div>
-                          <div class="modal-body text-color">
-                            <form [formGroup]="updateMedicineForm" class="p-5" (ngSubmit)="updateMedicine()">
-                              <div class="pb-4">
-                                <input type="text" class="inputs text-color form-control" id="Medicine" formControlName="Medicine">
-                            </div>
-                            <div class="pb-4">
-                              <select class="inputs text-color form-select" formControlName="Category" aria-label="Default select example">
-                              <option value="Paantha">Paantha</option>
-                              <option value="Kasaya">Kasaya</option>
-                              <option value="Guli">Guli</option>
-                              <option value="Chuurna">Chuurna</option>
-                              <option value="Beauty">Beauty</option>
-                              <option value="Thel">Thel</option>
-                              <option value="Kalka">Kalka</option>
-                              <option value="Arishta">Arishta</option>
-                              <option value="Kwatha">Kwatha</option>
-                              <option value="Thel">Thel</option>
-                              <option value="Aasawa">Aasawa</option>
-                              </select>
-                            </div>
-                            <div class="pb-4">
-                              <input type="text" class="inputs text-color form-control" id="Unit" placeholder="Unit" formControlName="Unit" name="Unit">
-                            </div>
-                            <div class="pb-4">
-                                <input type="text" class="inputs text-color form-control" formControlName="PricePerUnit" id="PricePerUnit" name="PricePerUnit" placeholder="Price Per Unit">
-                            </div>
-                            <div class="pb-4">
-                                <input type="text" class="inputs text-color form-control" formControlName="Quantity" id="Quantity" name="Quantity" placeholder="Available Quantity">
-                            </div>
-                              <div class="d-flex justify-content-end pt-3">
-                                <button class="btn-dark-green px-5">Edit</button>
-                              </div>
-                            </form>
-                          </div>
-                      </ng-template>
-                    </td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="openDelete(content6,medicine.id)"><i
-                      class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button>
-                      <!-- TODO : start delete modal -->
-                      <ng-template #content6 let-modal>
-                        <div class="modal-body d-flex flex-column justify-content-center align-items-center">
-                          <div class="pt-2"><i style="font-size: 80px;" class="fas fa-times-circle text-danger"></i></div>
-                          <div class="text-muted pt-5" style="font-size: 35px;font-weight:bold;">Remove Medicine</div>
-                          <div class="text-muted pb-4">Are you sure, you want delete this medicine?</div>
-                          <div class="d-flex flex-row">
-                            <div><button type="button" class="btn btn-danger px-5 py-2 mx-2" (click)="deleteMedicine();modal.close('Save click')">Delete</button></div>
-                            <div><button type="button" class="btn btn-dark text-white px-5 py-2 mx-2" (click)="modal.close('Save click')">Cancel</button></div>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </td>
               </tr>
+              <ng-container *ngIf="medicines != null && medicines.length != 0; else elseBlock">
+                <tr *ngFor="let medicine of medicines| filter:key">
+                  <th scope="row" style="max-width: 200px;" class="text-color">{{medicine.medicine}}</th>
+                  <td>{{medicine.category}}</td>
+                  <td>{{medicine.unit}}</td>
+                  <td>{{medicine.pricePerUnit}}</td>
+                  <td>{{medicine.quantity}}</td>
+                  <td>{{medicine.soldAmount}}</td>
+                  <td>{{medicine.availableQuantity}}</td>
+                  <!-- <td>100</td> -->
+                  <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1,medicine.id)"><i
+                        class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button>
+                        <!--edit medicine starts here-->
+                        <ng-template #content1 let-modal>
+                          <div class="modal-header bg-color text-white">
+                              <h5 class="modal-title" id="personalInfo">Edit Medicine</h5>
+                              <button type="button" class="close bg-color border-0" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true" class="text-white">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body text-color">
+                              <form [formGroup]="updateMedicineForm" class="p-5" (ngSubmit)="updateMedicine()">
+                                <div class="pb-4">
+                                  <input type="text" class="inputs text-color form-control" id="Medicine" formControlName="Medicine">
+                              </div>
+                              <div class="pb-4">
+                                <select class="inputs text-color form-select" formControlName="Category" aria-label="Default select example">
+                                <option value="Paantha">Paantha</option>
+                                <option value="Kasaya">Kasaya</option>
+                                <option value="Guli">Guli</option>
+                                <option value="Chuurna">Chuurna</option>
+                                <option value="Beauty">Beauty</option>
+                                <option value="Thel">Thel</option>
+                                <option value="Kalka">Kalka</option>
+                                <option value="Arishta">Arishta</option>
+                                <option value="Kwatha">Kwatha</option>
+                                <option value="Thel">Thel</option>
+                                <option value="Aasawa">Aasawa</option>
+                                </select>
+                              </div>
+                              <div class="pb-4">
+                                <input type="text" class="inputs text-color form-control" id="Unit" placeholder="Unit" formControlName="Unit" name="Unit">
+                              </div>
+                              <div class="pb-4">
+                                  <input type="text" class="inputs text-color form-control" formControlName="PricePerUnit" id="PricePerUnit" name="PricePerUnit" placeholder="Price Per Unit">
+                              </div>
+                              <div class="pb-4">
+                                  <input type="text" class="inputs text-color form-control" formControlName="Quantity" id="Quantity" name="Quantity" placeholder="Available Quantity">
+                              </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                  <button class="btn-dark-green px-5">Edit</button>
+                                </div>
+                              </form>
+                            </div>
+                        </ng-template>
+                      </td>
+                  <td class="text-center"><button class="btn-table btn-default" (click)="openDelete(content6,medicine.id)"><i
+                        class="fas fa-trash text-danger shadow-elements py-2 px-3 rounded"></i></button>
+                        <!-- TODO : start delete modal -->
+                        <ng-template #content6 let-modal>
+                          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="pt-2"><i style="font-size: 80px;" class="fas fa-times-circle text-danger"></i></div>
+                            <div class="text-muted pt-5" style="font-size: 35px;font-weight:bold;">Remove Medicine</div>
+                            <div class="text-muted pb-4">Are you sure, you want delete this medicine?</div>
+                            <div class="d-flex flex-row">
+                              <div><button type="button" class="btn btn-danger px-5 py-2 mx-2" (click)="deleteMedicine();modal.close('Save click')">Delete</button></div>
+                              <div><button type="button" class="btn btn-dark text-white px-5 py-2 mx-2" (click)="modal.close('Save click')">Cancel</button></div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </td>
+                </tr>
+              </ng-container>
+              <ng-template #elseBlock>
+                <tr class="text-center">
+                    <td colspan="9" class="text-center">NO RECORD FOUND</td>
+                </tr>
+            </ng-template>
+              
             </tbody>
           </table>
         </div>

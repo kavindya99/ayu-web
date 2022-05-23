@@ -17,6 +17,8 @@ export class DoctorsComponent implements OnInit {
   updateMedicineID: any;
   response: any;
   updateMedicineForm: any;
+  getPatientForDelete: any;
+  showAllData: any;
 
   constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
@@ -54,12 +56,12 @@ export class DoctorsComponent implements OnInit {
 
   del_res:any;
 
-  activateDoctor(){
+  deleteDoctor(){
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('accept', 'text/plain');
     
-    this.http.get(this.apiUrl+'/user/doctors/'+this.getMedicineForDelete
+    this.http.get(this.apiUrl+'/user/delete-patient/'+this.getPatientForDelete
     ,{
       headers: headers,
       reportProgress:true,
@@ -73,38 +75,35 @@ export class DoctorsComponent implements OnInit {
       if (this.del_res.status == 200){
         //this.getMedicineById();
         console.log("deleted")
+        this.SuccessMessage("Successfully removed the Doctor");
       }
       else{
         console.log('failed');
+        this.ErrorMessage("Doctor Deletion failed");
       }
       this.modalService.dismissAll();
       this.getDoctors();
     })
   }
 
-  getDoctorForActivate(){
-    this.http.get(this.apiUrl+'/user/activate-doctor/'+this.updateMedicineID,{observe: 'response'}).subscribe(res=>{
-      this.response = res;
-      console.log(this.response.status);
-      console.log(this.updateMedicineID);
-      console.log(this.response.body);
-        //console.log(this.selected_medicine_response.medicine);
-        if(this.response.status==200){
-          this.updateMedicineForm.patchValue({
-            Medicine:this.response.body.medicine,
-            Category:this.response.body.category,
-            Unit:this.response.body.unit,
-            PricePerUnit:this.response.body.pricePerUnit,
-            Quantity:this.response.body.quantity,
-          })
-        } else{
-          console.log(this.response.status);
-        }       
+  getMedicineById(){
+    this.http.get(this.apiUrl+'/user/doctors/'+this.getPatientForDelete,{observe: 'response'}).subscribe(res=>{
+        console.warn(res);
+        this.getPatientForDelete = res;
+        if (this.getPatientForDelete.status === 0){
+          console.log("Error!! ");
+        }
+        else{
+          this.showAllData = this.getPatientForDelete.data;
+  
+        }
     })
   }
 
+  
+
   openDelete(content6: any,id: any) {
-    this.getMedicineForDelete = id;
+    this.getPatientForDelete = id;
     this.modalService.open(content6, { centered: true });
   }
 
@@ -120,7 +119,7 @@ export class DoctorsComponent implements OnInit {
     this.modalService.open(content2, { centered: true });
   }
 
-  ErrorMessage () {
+  ErrorMessage (text:any) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -131,26 +130,11 @@ export class DoctorsComponent implements OnInit {
     
     Toast.fire({
       icon: 'error',
-      title: "Edit Failed"
-    })
-  }
-  
-  ErrorRemove () {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 5000,
-      timerProgressBar: false,
-    })
-    
-    Toast.fire({
-      icon: 'error',
-      title: "Remove Failed"
+      title: text
     })
   }
 
-  SuccessMessage () {
+  SuccessMessage (text:any) {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -161,44 +145,8 @@ export class DoctorsComponent implements OnInit {
     
     Toast.fire({
       icon: 'success',
-      title: "Removed Successfully"
+      title: text
     })
-  }
-
-  SuccessEdit () {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 5000,
-      timerProgressBar: false,
-    })
-    
-    Toast.fire({
-      icon: 'success',
-      title: "Editted Successfully"
-    })
-  }
-
-  cancelMessage(){
-    Swal.fire({
-      title: '<strong>Remove Doctor</strong>',
-      iconHtml: '<i class="fas fa-thumbs-down text-danger bg-white"></i>',
-      
-      html:
-        'Do you want to Remove this doctor?',
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonColor: '#D04848',
-      confirmButtonText:
-        'Remove',
-      cancelButtonText:
-        'Cancel',      
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.SuccessMessage ();
-      }
-    });
   }
 
 }

@@ -23,82 +23,102 @@
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col" class="rounded-end"></th>
-              <tr *ngFor="let doctor of doctors| filter:key">
-                <th scope="row" class="text-color">{{doctor.name}}</th>
-                <!-- <td>1st April</td> -->
-                <td class="text-center"><button class="btn-table btn-default" (click)="viewInfo(content)" placement="top" ngbTooltip="View Doctor Info" type="button"
-                    ><i
-                      class="fab fa-wpforms text-color shadow-elements py-2 px-3 rounded"></i></button>
-                      <!--view details modal starts here-->
-                      <ng-template #content let-modal>
-                        <div class="modal-header bg-color text-white">
-                            <h5 class="modal-title" id="personalInfo">Doctor Registration Form Details</h5>
-                          </div>
-                          <div class="modal-body text-color">
-                              <div class="text-color-light pb-2">Personal Info</div>
-                              <div class="row">
-                                  <div class="col-4">Name</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.name}}</div>
-                              </div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Gender</div>
-                                  <div class="col-1">:</div>
-                                  <div *ngIf="doctor.gender == 1 " class="col-7">Female</div>
-                                  <div *ngIf="doctor.gender == 0 " class="col-7">Male</div>
-                                  
-                              </div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Email</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.email}}</div>
-                              </div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Contact No.</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.phoneNumber}}</div>
-                              </div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Address</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.lane}}, {{doctor.district}}, {{doctor.province}}</div>
-                              </div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Available Time</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">From : {{doctor.availableTimeFrom}} <br> To : {{doctor.availableTimeTo}}</div>
-                              </div>
-                              <div class="row pb-3">
-                                  <div class="col-4">Service</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7" >
-                                    <div class=" d-flex flex-column"*ngFor="let service of serviceType ; let i = index">{{service}}</div>
-                                  </div>
-                              </div>
-                              <div class="text-color-light pb-2">Proffesional Info</div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Doctor ID</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.medicalCouncilRegID}}</div>
-                              </div>
-                              <div class="row pb-1">
-                                  <div class="col-4">Hospital</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.hospital}}</div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-4">Specialization</div>
-                                  <div class="col-1">:</div>
-                                  <div class="col-7">{{doctor.specialization}}</div>
-                              </div>
-                          </div>
-                      </ng-template>
-                    </td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="approveMessage()"><i
-                      class="fas fa-thumbs-up text-primary shadow-elements py-2 px-3 rounded"></i></button></td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
-                      class="fas fa-thumbs-down text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
               </tr>
+              <ng-container *ngIf="doctors != null && doctors.length != 0; else elseBlock">
+                <tr *ngFor="let doctor of doctors| filter:key">
+                  <th scope="row" class="text-color">{{doctor.name}}</th>
+                  <!-- <td>1st April</td> -->
+                  <td class="text-center"><button class="btn-table btn-default" (click)="viewInfo(content)" placement="top" ngbTooltip="View Doctor Info" type="button"
+                      ><i
+                        class="fab fa-wpforms text-color shadow-elements py-2 px-3 rounded"></i></button>
+                        <!--view details modal starts here-->
+                        <ng-template #content let-modal>
+                          <div class="modal-header bg-color text-white">
+                              <h5 class="modal-title" id="personalInfo">Doctor Registration Form Details</h5>
+                            </div>
+                            <div class="modal-body text-color">
+                                <div class="text-color-light pb-2">Personal Info</div>
+                                <div class="row">
+                                    <div class="col-4">Name</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.name}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Gender</div>
+                                    <div class="col-1">:</div>
+                                    <div *ngIf="doctor.gender == 1 " class="col-7">Female</div>
+                                    <div *ngIf="doctor.gender == 0 " class="col-7">Male</div>
+                                    
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Email</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.email}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Contact No.</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.phoneNumber}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Address</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.lane}}, {{doctor.district}}, {{doctor.province}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Available Time</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">From : {{doctor.availableTimeFrom}} <br> To : {{doctor.availableTimeTo}}</div>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col-4">Service</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7" >
+                                      <div class=" d-flex flex-column" *ngFor="let i of doctor.serviceType.split(',')">{{i}}</div>
+                                    </div>
+                                </div>
+                                <div class="text-color-light pb-2">Proffesional Info</div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Doctor ID</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.medicalCouncilRegID}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-4">Hospital</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.hospital}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">Specialization</div>
+                                    <div class="col-1">:</div>
+                                    <div class="col-7">{{doctor.specialization}}</div>
+                                </div>
+                            </div>
+                        </ng-template>
+                      </td>
+                  <td class="text-center"><button class="btn-table btn-default" (click)="openActivateDoctor(content6,doctor.id)"><i
+                        class="fas fa-thumbs-up text-color shadow-elements py-2 px-3 rounded"></i></button>
+                        <ng-template #content6 let-modal>
+                          <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="pt-2"><i style="font-size: 80px;" class="fas fa-check-circle text-color"></i></div>
+                            <div class="text-muted pt-5" style="font-size: 35px;font-weight:bold;">Approve Doctor Registration</div>
+                            <div class="text-muted pb-4">Are you sure, you want to activate this doctor?</div>
+                            <div class="d-flex flex-row">
+                              <div><button type="button" class="btn bg-color text-white px-5 py-2 mx-2" (click)="activateDoctor();modal.close('Save click')">Yes</button></div>
+                              <div><button type="button" class="btn btn-dark text-white px-5 py-2 mx-2" (click)="modal.close('Save click')">Cancel</button></div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </td>
+                  <td class="text-center"><button class="btn-table btn-default" (click)="cancelMessage()"><i
+                        class="fas fa-thumbs-down text-danger shadow-elements py-2 px-3 rounded"></i></button></td>
+                </tr>
+              </ng-container>              
+              <ng-template #elseBlock>
+                <tr class="text-center">
+                    <td colspan="4" class="text-center">NO RECORD FOUND</td>
+                </tr>
+            </ng-template>
               
             </tbody>
           </table>

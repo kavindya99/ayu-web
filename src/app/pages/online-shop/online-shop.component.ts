@@ -34,8 +34,6 @@ export class OnlineShopComponent implements OnInit {
   //
   //
   //
-  mySelect = '0';
-  selectedValue: any;
 
   medFormValidations () {
 
@@ -46,7 +44,7 @@ export class OnlineShopComponent implements OnInit {
       'PricePerUnit': new FormControl(null),
       'Quantity': new FormControl(null)
     });
-}
+  }
 
   addMedicine(){
 
@@ -80,6 +78,7 @@ export class OnlineShopComponent implements OnInit {
         case HttpEventType.Response:
         console.log(event);
       }
+      this.SuccessMessage("Medicine Added Successfully");
       this.modalService.dismissAll();
       this.getMedicine();
     })
@@ -122,7 +121,6 @@ export class OnlineShopComponent implements OnInit {
         }       
     })
   }
-  medicineResponse:any;
 
   updateMedicine(){
     console.log(this.updateMedicineForm.value.Medicine);
@@ -155,6 +153,7 @@ export class OnlineShopComponent implements OnInit {
       break;
       case HttpEventType.Response:
       console.log(event);
+      this.SuccessMessage("Successfully updated the medicine");
     }
     this.modalService.dismissAll();
     this.getMedicine();    
@@ -200,9 +199,11 @@ export class OnlineShopComponent implements OnInit {
       if (this.del_res.status == 200){
         //this.getMedicineById();
         console.log("deleted")
+        this.SuccessMessage("Successfully deleted the Medicine");
       }
       else{
         console.log('failed');
+        this.ErrorMessage("Medicine Deletion failed")
       }
       this.modalService.dismissAll();
       this.getMedicine();
@@ -218,7 +219,7 @@ export class OnlineShopComponent implements OnInit {
         console.warn(res);
         this.getMedicineForDelete = res;
         if (this.getMedicineForDelete.status === 0){
-          console.log("Error!! Meeting Information Getting Failed!!");
+          console.log("Error!! ");
         }
         else{
           this.showAllData = this.getMedicineForDelete.data;
@@ -232,6 +233,36 @@ export class OnlineShopComponent implements OnInit {
     this.getMedicine();
     this.updateMedFormValidations();
     //this.getMedcineForEdit();
+  }
+
+  ErrorMessage (error: any) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: false,
+    })
+    
+    Toast.fire({
+      icon: 'error',
+      title: error
+    })
+  }
+  
+  SuccessMessage (text: any) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: false,
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: text
+    })
   }
   
 

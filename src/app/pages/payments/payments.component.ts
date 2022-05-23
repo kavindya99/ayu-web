@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AyuService } from 'src/app/ayu.service';
@@ -13,11 +14,13 @@ import Swal from 'sweetalert2';
 })
 
 export class PaymentsComponent implements OnInit {
+  updateFeeID: any;
 
   constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.getFees();
+    this.updateMedFormValidations();
   }
 
   fees:any=[]
@@ -25,23 +28,111 @@ export class PaymentsComponent implements OnInit {
 
   getFees(){
     this.http.get(this.apiUrl+'/api/Fees').subscribe(res=>{
-      console.log(res);
+      //console.log(res);
       this.fees = res;
     })
   }
+
+  feeForm = new FormGroup({});
+  response:any = [];
+
+  updateMedFormValidations() {
+
+    this.feeForm = new FormGroup({ 
+      'Fee': new FormControl(null)
+    });
+}
+
+getFeeForEdit(){
+  this.http.get(this.apiUrl+'/api/Fees/'+this.updateFeeID,{observe: 'response'}).subscribe(res=>{
+    this.response = res;
+    //console.log(this.response.status);
+    //console.log(this.updateFeeID);
+    //console.log(this.response.body);
+      //console.log(this.selected_medicine_response.medicine);
+      if(this.response.status==200){
+        this.feeForm.patchValue({
+          Fee:this.response.body.fee,
+        })
+        console.log(this.response.body.fee);
+      } else{
+        console.log(this.response.status);
+      }       
+  })
+}
+
+  updateFee(){
+    //console.log(this.feeForm.value.Fee);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('accept', 'text/plain');
+    
+    const fd = new FormData();
+    //console.log(this.updateFeeID);
+    fd.append('Id',this.updateFeeID);
+    fd.append('Fee',this.feeForm.value.Fee);
+  this.http.post(this.apiUrl+'/api/Fees/fee-update',fd,{
+    headers: headers,
+    reportProgress:true,
+    observe:'events',
+
+  }).subscribe((event:HttpEvent<any>) =>{
+    switch (event.type){
+      case HttpEventType.Sent:
+        console.log('Request has been made!');
+        break;
+      case HttpEventType.ResponseHeader:
+        console.log('Response header has been received!');
+        break;
+      case HttpEventType.UploadProgress:
+      break;
+      case HttpEventType.Response:
+      //console.log(event);
+      this.SuccessMessage("Successfully updated the Fee");
+    }
+    this.modalService.dismissAll();
+    this.getFees();    
+  });
+  //this.http.put(this.apiUrl+'/api/Medicines/'+this.updateMedicineID,fd,{ headers: headers }).subscribe(results =>console.log(results));
+}
 
   accountInfo(content: any) {
     this.modalService.open(content, { centered: true });
   }
 
-  editItem1(content1: any) {
+  editItem(content1: any,id:any) {
+    this.updateFeeID=id;
      this.modalService.open(content1, { centered: true , size: 'sm' },);
    }
-   editItem2(content2: any) {
-    this.modalService.open(content2, { centered: true ,size: 'sm'});
+
+   ErrorMessage (error: any) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: false,
+    })
+    
+    Toast.fire({
+      icon: 'error',
+      title: error
+    })
   }
-  editItem3(content3: any) {
-    this.modalService.open(content3, { centered: true , size: 'sm'});
+  
+  SuccessMessage (text: any) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: false,
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: text
+    })
   }
 
   cancelMessage(){
