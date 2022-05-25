@@ -37,14 +37,46 @@
                 <th scope="col">Delivary Address</th>
                 <th scope="col">Phone No</th>
                 <th scope="col" class="rounded-end">Products</th>
-              <tr>
-                <th scope="row" style="max-width: 200px;" class="text-color">01</th>
-                <td>001</td>
-                <td>250</td>
-                <td>no delivered</td>
-                <td>1st Lane, Kandy</td>
-                <td>070 3532119</td>
-                <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1)"><i class="fas fa-shopping-cart text-color shadow-elements py-2 px-3 rounded"></i></button></td>
+              <tr *ngFor="let order of orders| filter:key">
+                <th scope="row" style="max-width: 200px;" class="text-color">{{order.id}}</th>
+                <td>{{order.userId}}</td>
+                <td>{{order.amount}}</td>
+                <td *ngIf="order.status == 0 ">order not sent</td>
+                <td *ngIf="order.status == 1 ">order sent</td>
+                <td>{{order.deliveryAddress}}</td>
+                <td>{{order.phoneNo}}</td>
+                <td class="text-center">
+                  <button class="btn-table btn-default" (click)="editItem(content1)"><i class="fas fa-shopping-cart text-color shadow-elements py-2 px-3 rounded"></i>
+                  </button>
+                  <!--edit medicine starts here-->
+                  <ng-template #content1 let-modal>
+                    <div class="modal-header bg-color text-white">
+                        <h5 class="modal-title" id="personalInfo">Products in the cart</h5>
+                      </div>
+                      <div class="modal-body text-color">
+                        <div class="table-responsive pt-md-4">
+                            <table class="table table-bordered bg-light rounded shadow-elements">
+                              <tbody>
+                                <tr class="bg-color text-white text-center rounded">
+                                  <th scope="col" class="rounded-start">Product Name</th>
+                                  <th scope="col">Quantity</th>
+                                  <th scope="col">Price</th>
+                                </tr>
+                                <tr *ngFor="let orderItems of orders.itemDetails ; let i=index;">
+                                  <th scope="row" style="max-width: 200px;" class="text-color-light">{{orderItems[i]}}</th>
+                                  <td>{{order.itemDetails.quantity}}</td>
+                                  <td>{{order.itemDetails.price}}</td>
+                                </tr>
+                                <tr class="text-color">
+                                    <th colspan="2">Total</th>
+                                    <td scope="col">250</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+                  </ng-template>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -69,50 +101,6 @@
       </div>
     </div>
   </div>
-
-<!--edit medicine starts here-->
-<ng-template #content1 let-modal>
-    <div class="modal-header bg-color text-white">
-        <h5 class="modal-title" id="personalInfo">Products in the cart</h5>
-      </div>
-      <div class="modal-body text-color">
-        <div class="table-responsive pt-md-4">
-            <table class="table table-bordered bg-light rounded shadow-elements">
-              <tbody>
-                <tr class="bg-color text-white text-center rounded">
-                  <th scope="col" class="rounded-start">Product Name</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Price</th>
-                </tr>
-                <tr>
-                  <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
-                  <td>100</td>
-                  <td>250</td>
-                </tr>
-                <tr>
-                    <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
-                    <td>100</td>
-                    <td>250</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
-                    <td>100</td>
-                    <td>250</td>
-                  </tr>
-                <tr>
-                    <th scope="row" style="max-width: 200px;" class="text-color-light">Koththamalli</th>
-                    <td>100</td>
-                    <td>250</td>
-                  </tr>
-                <tr class="text-color">
-                    <th colspan="2">Total</th>
-                    <td scope="col">250</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-      </div>
-</ng-template>
 
 <!--add medicine starts here-->
 <ng-template #content2 let-modal>

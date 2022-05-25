@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AyuService } from 'src/app/ayu.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,10 +14,23 @@ import Swal from 'sweetalert2';
 export class OrdersComponent implements OnInit {
 
   model: any;
+  apiUrl = environment.backend_url;
+  orders: any;
+  orderDetails: any;
+  p: number = 1; key:string=''; focus: any; focus2: any;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
+
+  getOrders(){
+    this.http.get(this.apiUrl+'/api/Order/orders').subscribe(res=>{      
+      this.orders = res;
+      console.log(this.orders);
+      this.orderDetails=this.orders.itemDetails;
+    })
+  }
 
   ngOnInit(): void {
+    this.getOrders();
   }
 
   editItem(content1: any) {
