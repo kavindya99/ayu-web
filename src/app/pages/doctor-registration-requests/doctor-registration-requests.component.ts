@@ -81,6 +81,10 @@ export class DoctorRegistrationRequestsComponent implements OnInit {
      this.modalService.open(content, { centered: true });
    }
 
+   openDelete(content6: any,id: any) {
+    this.modalService.open(content6, { centered: true });
+  }
+
    ErrorMessage (error: any) {
     const Toast = Swal.mixin({
       toast: true,

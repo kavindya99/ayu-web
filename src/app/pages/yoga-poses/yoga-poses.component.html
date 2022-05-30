@@ -30,7 +30,7 @@
                             <th scope="col" class="rounded-end"></th>
                         </tr>
                         <ng-container *ngIf="poses != null && poses.length != 0; else elseBlock">
-                            <tr *ngFor="let pose of poses| filter:key">
+                            <tr *ngFor="let pose of poses| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                                 <th scope="row" class="text-color">{{pose.name}}</th>
                                 <td>{{pose.category}}</td>
                                 <!-- <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><i
@@ -136,23 +136,10 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="...">
-                <ul class="pagination justify-content-center">
-                    <a class="page-link text-color-light" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    <li class="page-item"><a class="page-link text-color-light" href="#">1</a></li>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link text-color-light" href="#">2</a>
-                    </li>
-                    <li class="page-item"><a class="page-link text-color-light" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link text-color-light" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
         </div>    
     </div>
 </div>
@@ -164,6 +151,7 @@
     </div>
     <div class="modal-body text-color">
         <form [formGroup]="yogaPoseForm" class="p-5" (ngSubmit)="addYoga()">
+            <div class="pb-4">When you are adding steps of the yoga pose, seperate each step by a ','</div>
             <div class="pb-4">
                 <input type="text" class="inputs text-color form-control" formControlName="Name" id="Name" placeholder="Name" required>
             </div>

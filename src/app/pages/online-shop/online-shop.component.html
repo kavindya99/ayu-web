@@ -42,14 +42,14 @@
                 <th scope="col" class="rounded-end"></th>
               </tr>
               <ng-container *ngIf="medicines != null && medicines.length != 0; else elseBlock">
-                <tr *ngFor="let medicine of medicines| filter:key">
+                <tr *ngFor="let medicine of medicines| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                   <th scope="row" style="max-width: 200px;" class="text-color">{{medicine.medicine}}</th>
                   <td>{{medicine.category}}</td>
                   <td>{{medicine.unit}}</td>
                   <td>{{medicine.pricePerUnit}}</td>
                   <td>{{medicine.quantity}}</td>
-                  <td>{{medicine.soldAmount}}</td>
-                  <td>{{medicine.availableQuantity}}</td>
+                  <td>{{(medicine.quantity)*1//4}}</td>
+                  <td>{{medicine.quantity - (medicine.quantity)*3/4}}</td>
                   <!-- <td>100</td> -->
                   <td class="text-center"><button class="btn-table btn-default" (click)="editItem(content1,medicine.id)"><i
                         class="fas fa-edit text-color shadow-elements py-2 px-3 rounded"></i></button>
@@ -123,7 +123,7 @@
             </tbody>
           </table>
         </div>
-        <nav aria-label="...">
+        <!-- <nav aria-label="...">
           <ul class="pagination justify-content-center">
             <a class="page-link text-color-light" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -139,7 +139,11 @@
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
+        <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
       </div>
     </div>
   </div>

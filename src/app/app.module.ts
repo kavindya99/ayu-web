@@ -12,6 +12,7 @@ import { InquiriesComponent } from './pages/inquiries/inquiries.component';
 import { QuillModule } from 'ngx-quill';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     [NgbModule],
     [NgbPaginationModule, NgbAlertModule],
     QuillModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

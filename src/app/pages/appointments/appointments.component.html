@@ -32,7 +32,7 @@
                 <th scope="col">Fee</th>
                 <th scope="col"></th>
                 <th scope="col" class="rounded-end"></th>
-              <tr *ngFor="let channel of channels| filter:key">
+              <tr *ngFor="let channel of channels| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                 <th scope="row" class="text-color">{{channel.doctorName}}</th>
                 <td>{{channel.date}}</td>
                 <td>{{channel.timeSlot}}</td>
@@ -57,7 +57,7 @@
             </tbody>
           </table>
         </div>
-        <nav aria-label="...">
+        <!-- <nav aria-label="...">
           <ul class="pagination justify-content-center">
             <a class="page-link text-color-light" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -73,7 +73,11 @@
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
+        <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
       </div>
     </div>
   </div>

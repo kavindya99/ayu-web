@@ -28,7 +28,7 @@
               <th scope="col" class="rounded-end"></th>
             </tr>
             <ng-container *ngIf="doctors != null && doctors.length != 0; else elseBlock">
-              <tr *ngFor="let doctor of doctors| filter:key">
+              <tr *ngFor="let doctor of doctors| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                 <th scope="row" class="text-color">{{doctor.name}}</th>
                 <td class="text-center"><button class="btn-table btn-default" (click)="personalInfo(content1)"><i
                       class="fas fa-user-alt text-color-light shadow-elements py-2 px-3 rounded"></i></button>
@@ -227,7 +227,7 @@
           </tbody>
         </table>
       </div>
-      <nav aria-label="...">
+      <!-- <nav aria-label="...">
         <ul class="pagination justify-content-center">
           <a class="page-link text-color-light" href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
@@ -243,7 +243,11 @@
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> -->
+      <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
     </div>
   </div>
 </div>
