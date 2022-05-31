@@ -62,10 +62,10 @@
                                   <th scope="col">Quantity</th>
                                   <th scope="col">Price</th>
                                 </tr>
-                                <tr>
-                                  <th scope="row" style="max-width: 200px;" class="text-color-light">beli mal</th>
-                                  <td>100</td>
-                                  <td>250</td>
+                                <tr *ngFor="let itemDetail of order.itemDetails">
+                                  <th scope="row" style="max-width: 200px;" class="text-color-light">{{itemDetail.productName}}</th>
+                                  <td>{{itemDetail.quantity}}</td>
+                                  <td>{{itemDetail.price}}</td>
                                 </tr>
                                 <tr class="text-color">
                                     <th colspan="2">Total</th>
