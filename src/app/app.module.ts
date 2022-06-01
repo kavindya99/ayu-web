@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,8 @@ import { QuillModule } from 'ngx-quill';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import{TokenInterceptorService} from '../app/token-interceptor.service';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -36,7 +38,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     Ng2SearchPipeModule,
     NgxPaginationModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+    }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
