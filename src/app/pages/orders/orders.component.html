@@ -37,7 +37,7 @@
                 <th scope="col">Delivary Address</th>
                 <th scope="col">Phone No</th>
                 <th scope="col" class="rounded-end">Products</th>
-              <tr *ngFor="let order of orders| filter:key">
+              <tr *ngFor="let order of orders| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                 <th scope="row" style="max-width: 200px;" class="text-color">{{order.id}}</th>
                 <td>{{order.userId}}</td>
                 <td>{{order.amount}}</td>
@@ -62,10 +62,10 @@
                                   <th scope="col">Quantity</th>
                                   <th scope="col">Price</th>
                                 </tr>
-                                <tr *ngFor="let orderItems of orders.itemDetails ; let i=index;">
-                                  <th scope="row" style="max-width: 200px;" class="text-color-light">{{orderItems[i]}}</th>
-                                  <td>{{order.itemDetails.quantity}}</td>
-                                  <td>{{order.itemDetails.price}}</td>
+                                <tr *ngFor="let itemDetail of order.itemDetails">
+                                  <th scope="row" style="max-width: 200px;" class="text-color-light">{{itemDetail.productName}}</th>
+                                  <td>{{itemDetail.quantity}}</td>
+                                  <td>{{itemDetail.price}}</td>
                                 </tr>
                                 <tr class="text-color">
                                     <th colspan="2">Total</th>
@@ -81,23 +81,10 @@
             </tbody>
           </table>
         </div>
-        <nav aria-label="...">
-          <ul class="pagination justify-content-center">
-            <a class="page-link text-color-light" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-            <li class="page-item"><a class="page-link text-color-light" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-              <a class="page-link text-color-light" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link text-color-light" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link text-color-light" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
       </div>
     </div>
   </div>

@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 export class PaymentsComponent implements OnInit {
   updateFeeID: any;
   payment: any;
+  p: number = 1; key:string=''; focus: any; focus2: any;
 
   constructor(private router:Router,private modalService: NgbModal,private service: AyuService,private http:HttpClient) { }
 
@@ -113,6 +114,10 @@ getFeeForEdit(){
     this.updateFeeID=id;
      this.modalService.open(content1, { centered: true , size: 'sm' },);
    }
+
+   openDelete(content6: any,id: any) {
+    this.modalService.open(content6, { centered: true });
+  }
 
    ErrorMessage (error: any) {
     const Toast = Swal.mixin({

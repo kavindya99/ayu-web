@@ -30,13 +30,13 @@
                             <th scope="col"></th>
                             <th scope="col" class="rounded-end"></th>
                         </tr>
-                        <tr *ngFor="let recipe of recipes| filter:key">
+                        <tr *ngFor="let recipe of recipes| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                             <th scope="row" class="text-color">{{ recipe.name }}</th>
                             <td>{{ recipe.category }}</td>
                             <!-- <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><i
                                         class="fas fa-image text-warning shadow-elements py-2 px-3 rounded"></i></button>
                             </td> -->
-                            <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><div class="shadow-elements py-1 px-3 rounded"><img src="../../../assets/img/ingredients.png" alt="" style="width: 13.13px; height: 14.4px;"></div></button>
+                            <td class="text-center"><button class="btn-table btn-default" (click)="viewImage(content3)"><div class="shadow-elements py-1 px-3 rounded"><img src="../../../assets/img/ingredients.webp" alt="" style="width: 13.13px; height: 14.4px;"></div></button>
                                 <!--ingredients view modal starts here-->
                                 <ng-template #content3 let-modal>
                                     <div class="modal-header bg-color text-white">
@@ -86,12 +86,12 @@
                                                     </div>
                                                     <div class="pb-4">
                                                         <select class="inputs text-color form-select" aria-label="Default select example" formControlName="Category">
-                                                            <option value="SweetBeverages">Sweet Beverages</option>
-                                                            <option value="SweetItems">Sweet Items</option>
+                                                            <option value="Sweet Beverages">Sweet Beverages</option>
+                                                            <option value="Sweet Items">Sweet Items</option>
                                                             <option value="Beverages">Beverages</option>
-                                                            <option value="NonVegetarian">Non Vegetarian</option>
-                                                            <option value="CookingRecipes">Cooking Recipes</option>
-                                                            <option value="Pre-cookingFoodRecipes">Pre-cooking Food Recipes</option>
+                                                            <option value="Non Vegetarian">Non Vegetarian</option>
+                                                            <option value="Cooking Recipes">Cooking Recipes</option>
+                                                            <option value="Pre-cooking Food Recipes">Pre-cooking Food Recipes</option>
                                                         </select>
                                                     </div>
                                                     <!-- <div class="pb-4">
@@ -139,7 +139,7 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="...">
+            <!-- <nav aria-label="...">
                 <ul class="pagination justify-content-center">
                     <a class="page-link text-color-light" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -155,7 +155,11 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
+            <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
         </div>    
     </div>
 </div>
@@ -169,17 +173,18 @@
     </div>
     <div class="modal-body text-color">
         <form [formGroup]="addFoodForm" class="p-5" (ngSubmit)="addFoodRecipe()">
+            <div class="pb-4">When you are adding steps of the food recipe, seperate each step by a ',' and when you are adding ingrediens, first type the ingredient, seperate with a ':', add amount of ingredient and then seperate with a ','</div>
             <div class="pb-4">
                 <input type="text" class="inputs text-color form-control" formControlName="Name" id="Name" placeholder="Name">
             </div>
             <div class="pb-4">
                 <select class="inputs text-color form-select" aria-label="Default select example" formControlName="Category">
-                    <option value="SweetBeverages">Sweet Beverages</option>
-                    <option value="SweetItems">Sweet Items</option>
+                    <option value="Sweet Beverages">Sweet Beverages</option>
+                    <option value="Sweet Items">Sweet Items</option>
                     <option value="Beverages">Beverages</option>
-                    <option value="NonVegetarian">Non Vegetarian</option>
-                    <option value="CookingRecipes">Cooking Recipes</option>
-                    <option value="Pre-cookingFoodRecipes">Pre-cooking Food Recipes</option>
+                    <option value="Non Vegetarian">Non Vegetarian</option>
+                    <option value="Cooking Recipes">Cooking Recipes</option>
+                    <option value="Pre-cooking FoodRecipes">Pre-cooking Food Recipes</option>
                 </select>
             </div>
             <!-- <div class="pb-4">

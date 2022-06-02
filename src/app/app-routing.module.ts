@@ -11,6 +11,8 @@ import { PatientsComponent } from './pages/patients/patients.component';
 import { PaymentsComponent } from './pages/payments/payments.component';
 import { YogaClassesComponent } from './pages/yoga-classes/yoga-classes.component';
 import { YogaPosesComponent } from './pages/yoga-poses/yoga-poses.component';
+import { RolesGuard } from './guard/roles.guard';
+import { AuthenticationGuard } from './guard/authentication.guard';
 
 const routes: Routes = [
   {
@@ -21,11 +23,12 @@ const routes: Routes = [
   },
 
   {
-    path: '',
+    path: 'administration',
+    data: { role: '0' },
     loadChildren: () =>
       import('./pages/dashboard/dashboard.module').then(
         (m) => m.DashboardModule,
-      ),/*canActivate:['AuthGuard'],*/
+      ), canLoad: [AuthenticationGuard, RolesGuard]
   },
 
   { path: '**', redirectTo: '', pathMatch:'full'}

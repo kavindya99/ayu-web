@@ -24,7 +24,7 @@
                 <th scope="col" class="rounded-end">Description</th>
               </tr>
               <ng-container *ngIf="inquires != null && inquires.length != 0; else elseBlock">
-                <tr *ngFor="let inquiry of inquires| filter:key">
+                <tr *ngFor="let inquiry of inquires| filter:key | paginate: { itemsPerPage: 7, currentPage: p  } let i = index;">
                   <th scope="row" class="text-color" style="max-width: 200px;">{{inquiry.name}}</th>
                   <td>{{inquiry.email}}</td>
                   <td style="max-width: 200px; min-width: 100px;">{{inquiry.subject}}</td>
@@ -39,7 +39,7 @@
             </tbody>
           </table>
         </div>
-        <nav aria-label="...">
+        <!-- <nav aria-label="...">
           <ul class="pagination justify-content-center">
             <a class="page-link text-color-light" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -55,65 +55,14 @@
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
+        <pagination-controls class="text-color text-center"
+                  (pageChange)="p = $event"
+                  nextLabel="Next">
+                </pagination-controls>
       </div>
     </div>
   </div>
 
-  <!--edit modal starts here-->
-  <div class="modal fade rounded" id="editInfo" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered rounded">
-      <div class="modal-content">
-        <div class="modal-header bg-color text-white">
-          <h5 class="modal-title" id="personalInfo">Edit Appointment Details</h5>
-        </div>
-        <div class="modal-body text-color">
-          <form action="" class="p-5">
-            <div class="pb-4">
-              <select class="inputs text-color form-select" aria-label="Default select example">
-                <option selected disabled>Doctor Name</option>
-                <option value="1">Doctor one</option>
-                <option value="2">Doctor two</option>
-                <option value="3">Doctor Three</option>
-              </select>
-            </div>
-            <div class="pb-4">
-              <input type="date" class="inputs text-color form-control" id="Position" placeholder="Date">
-            </div>
-            <div class="pb-4">
-              <select class="inputs text-color form-select" aria-label="Default select example">
-                <option selected disabled>Time</option>
-                <option value="1">1 pm</option>
-                <option value="2">2 pm</option>
-                <option value="3">3 pm</option>
-              </select>
-            </div>
-            <div class="d-flex justify-content-end pt-3">
-              <button class="btn-dark-green px-5">Edit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!--delete modal starts here-->
-  <div class="modal fade rounded" id="delete" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered rounded modal-sm">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="personalInfo">Delete</h5>
-        </div>
-        <div class="modal-body text-color">
-          <div class="text-center text-dark">Do you want to remove this yoga class from the system?</div>
-          <div class="text-center"><img src="../../../assets/img/decision.gif" class="w-50" alt=""></div>
-          <div class="d-flex flex-row justify-content-around">
-            <div><button class="btn btn-danger px-5">Yes</button></div>
-            <div><button class="btn btn-secondary px-5">No</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
